@@ -1,2 +1,2 @@
-# checkout-payment-gateway
+# Checkout.com Payment Gateway Challenge
 Payment Gateway Challenge
