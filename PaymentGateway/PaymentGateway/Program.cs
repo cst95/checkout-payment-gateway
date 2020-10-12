@@ -33,9 +33,8 @@ namespace PaymentGateway.API
                 {
                     logger.MinimumLevel.Information()
                         .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-                        .Enrich.FromLogContext();
-
-                    logger.WriteTo.Console(LogEventLevel.Debug);
+                        .Enrich.FromLogContext()
+                        .WriteTo.Console();
                 });
     }
 }
