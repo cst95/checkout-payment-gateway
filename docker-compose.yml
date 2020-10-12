@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  payment-gateway:
+    build:
+      context: ./PaymentGateway
+    environment: 
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:5000
