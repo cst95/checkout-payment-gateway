@@ -6,7 +6,6 @@ using Microsoft.Extensions.Hosting;
 using PaymentGateway.API.Data;
 using PaymentGateway.API.Interfaces;
 using PaymentGateway.API.Services;
-using PaymentGateway.API.Services.Interfaces;
 
 namespace PaymentGateway.API.Extensions
 {

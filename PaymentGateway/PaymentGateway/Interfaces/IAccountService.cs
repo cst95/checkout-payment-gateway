@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using PaymentGateway.API.Models;
 
-namespace PaymentGateway.API.Services.Interfaces
+namespace PaymentGateway.API.Interfaces
 {
     public interface IAccountService
     {

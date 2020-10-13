@@ -2,7 +2,7 @@
 using PaymentGateway.API.Models;
 using PaymentGateway.API.Models.Entities;
 
-namespace PaymentGateway.API.Services.Interfaces
+namespace PaymentGateway.API.Interfaces
 {
     public interface ITokenService
     {

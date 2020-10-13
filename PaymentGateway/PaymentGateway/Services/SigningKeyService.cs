@@ -3,7 +3,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using PaymentGateway.API.Services.Interfaces;
+using PaymentGateway.API.Interfaces;
 
 namespace PaymentGateway.API.Services
 {
