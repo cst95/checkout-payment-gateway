@@ -50,7 +50,8 @@ namespace PaymentGateway.API.Data
                 ExpiryDate = request.PaymentRequest.CardExpiryDate,
                 Cvv = request.PaymentRequest.CardCvv
             },
-            UserId = request.PaymentRequest.UserId,
+            UserId = request.PaymentRequest.User.Id,
+            User = request.PaymentRequest.User,
             DateTime = DateTime.UtcNow,
             Id = request.AcquiringBankResponse.Id,
             Success = request.AcquiringBankResponse.Success,
