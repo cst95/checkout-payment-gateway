@@ -27,10 +27,11 @@ namespace PaymentGateway.API.Extensions
                 {
                     options.UseSqlite(configuration.GetConnectionString("PaymentGateway"));
                 }
-
-                serviceCollection.AddTransient<ITokenService, TokenService>();
-                serviceCollection.AddTransient<ISigningKeyService, SigningKeyService>();
             });
+            
+            serviceCollection.AddTransient<ITokenService, TokenService>();
+            serviceCollection.AddTransient<ISigningKeyService, SigningKeyService>();
+            serviceCollection.AddTransient<IAccountService, AccountService>();
         }
     }
 }

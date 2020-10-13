@@ -9,7 +9,7 @@ namespace PaymentGateway.API.Models
         /// </summary>
         public bool Success { get; set; }
         /// <summary>
-        /// The Json Web Token.
+        /// The created Json Web Token.
         /// </summary>
         public string Token { get; set; }
         /// <summary>

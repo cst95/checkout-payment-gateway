@@ -32,10 +32,10 @@ namespace PaymentGateway.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication();
+            services.AddControllers();
+
             services.AddApplicationServices(Environment, Configuration);
             services.AddIdentity();
-
-            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

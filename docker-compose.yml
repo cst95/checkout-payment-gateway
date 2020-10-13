@@ -4,6 +4,8 @@ services:
   payment-gateway:
     build:
       context: ./PaymentGateway
+    ports: 
+      - 5000:5000
     environment: 
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:5000
