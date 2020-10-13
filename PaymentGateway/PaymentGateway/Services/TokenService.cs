@@ -11,8 +11,6 @@ namespace PaymentGateway.API.Services
 {
     public class TokenService : ITokenService
     {
-        private const int HoursUntilExpiry = 12;
-
         private readonly ILogger<TokenService> _logger;
         private readonly ISigningKeyService _signingKeyService;
 
@@ -22,7 +20,7 @@ namespace PaymentGateway.API.Services
             _signingKeyService = signingKeyService;
         }
 
-        public CreateTokenResponse CreateJsonWebToken(User user, DateTime currentUtcTime, int hoursUntilExpiry = HoursUntilExpiry)
+        public CreateTokenResponse CreateJsonWebToken(User user, DateTime currentUtcTime, int hoursUntilExpiry = 12)
         {
             if (user == null) return new CreateTokenResponse();
 
