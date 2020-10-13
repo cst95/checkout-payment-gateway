@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PaymentGateway.API.Data;
+using PaymentGateway.API.Services;
+using PaymentGateway.API.Services.Interfaces;
 
 namespace PaymentGateway.API.Extensions
 {
@@ -25,6 +27,8 @@ namespace PaymentGateway.API.Extensions
                 {
                     options.UseSqlite(configuration.GetConnectionString("PaymentGateway"));
                 }
+
+                serviceCollection.AddTransient<ITokenService, TokenService>();
             });
 
             return serviceCollection;

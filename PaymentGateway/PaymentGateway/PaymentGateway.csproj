@@ -10,12 +10,12 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />
         <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.7.1" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Controllers" />
       <Folder Include="Data\Migrations" />
-      <Folder Include="Models\DTOs" />
     </ItemGroup>
 
 </Project>
