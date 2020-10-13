@@ -9,9 +9,9 @@ namespace PaymentGateway.API.Models.Entities
         /// </summary>
         public string Id { get; set; }
         /// <summary>
-        /// The Id of the card that made the Payment
+        /// The Card Number (Unique identifier) of the card used to make the payment.
         /// </summary>
-        public string CardId { get; set; }
+        public int CardId { get; set; }
         /// <summary>
         /// The card that made the payment.
         /// </summary>

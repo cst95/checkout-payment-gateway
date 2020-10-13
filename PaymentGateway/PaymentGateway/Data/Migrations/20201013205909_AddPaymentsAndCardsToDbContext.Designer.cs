@@ -9,14 +9,14 @@ using PaymentGateway.API.Data;
 namespace PaymentGateway.API.Data.Migrations
 {
     [DbContext(typeof(PaymentGatewayContext))]
-    [Migration("20201013200038_AddPaymentsAndCardsToDbContext")]
+    [Migration("20201013205909_AddPaymentsAndCardsToDbContext")]
     partial class AddPaymentsAndCardsToDbContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8");
+                .HasAnnotation("ProductVersion", "3.1.9");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -148,10 +148,8 @@ namespace PaymentGateway.API.Data.Migrations
 
             modelBuilder.Entity("PaymentGateway.API.Models.Entities.Card", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("CardNumber")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Cvv")
@@ -173,8 +171,8 @@ namespace PaymentGateway.API.Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CardId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CardId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Currency")
                         .HasColumnType("INTEGER");
@@ -316,7 +314,9 @@ namespace PaymentGateway.API.Data.Migrations
                 {
                     b.HasOne("PaymentGateway.API.Models.Entities.Card", "Card")
                         .WithMany()
-                        .HasForeignKey("CardId");
+                        .HasForeignKey("CardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("PaymentGateway.API.Models.Entities.User", "User")
                         .WithMany()

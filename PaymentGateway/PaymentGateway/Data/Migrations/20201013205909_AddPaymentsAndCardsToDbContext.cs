@@ -11,8 +11,8 @@ namespace PaymentGateway.API.Data.Migrations
                 name: "Cards",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    CardNumber = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     ExpiryDate = table.Column<DateTime>(nullable: false),
                     Cvv = table.Column<int>(nullable: false)
                 },
@@ -26,7 +26,7 @@ namespace PaymentGateway.API.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    CardId = table.Column<string>(nullable: true),
+                    CardId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
                     Amount = table.Column<decimal>(nullable: false),
                     Currency = table.Column<int>(nullable: false),
@@ -41,7 +41,7 @@ namespace PaymentGateway.API.Data.Migrations
                         column: x => x.CardId,
                         principalTable: "Cards",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Payments_AspNetUsers_UserId",
                         column: x => x.UserId,
