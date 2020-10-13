@@ -17,14 +17,12 @@ namespace PaymentGateway.API.Extensions
         /// </summary>
         /// <param name="app"></param>
         /// <returns></returns>
-        public static IApplicationBuilder CreateDevelopmentDatabase(this IApplicationBuilder app)
+        public static void CreateDevelopmentDatabase(this IApplicationBuilder app)
         {
             using var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
             using var context = scope.ServiceProvider.GetService<PaymentGatewayContext>();
 
             context.Database.Migrate();
-
-            return app;
         }
 
         /// <summary>
@@ -33,7 +31,7 @@ namespace PaymentGateway.API.Extensions
         /// <param name="app"></param>
         /// <param name="userManager"></param>
         /// <returns></returns>
-        public static IApplicationBuilder CreateTestUser(this IApplicationBuilder app, UserManager<User> userManager)
+        public static void CreateTestUser(this IApplicationBuilder app, UserManager<User> userManager)
         {
             const string testUserName = "test";
             const string testPassword = "Password123!";
@@ -41,7 +39,7 @@ namespace PaymentGateway.API.Extensions
             if (userManager.FindByNameAsync(testUserName).Result != null)
             {
                 Log.Information("Test user already exists.");
-                return app;
+                return;
             }
             
             var identityResult = userManager.CreateAsync(new User
@@ -57,8 +55,6 @@ namespace PaymentGateway.API.Extensions
             {
                 Log.Warning("Test user creation failed.");
             }
-
-            return app;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace PaymentGateway.API
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
                 .UseSerilog((hostContext, logger) =>
                 {
-                    logger.MinimumLevel.Information()
+                    logger.MinimumLevel.Debug()
                         .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
                         .Enrich.FromLogContext()
                         .WriteTo.Console();
