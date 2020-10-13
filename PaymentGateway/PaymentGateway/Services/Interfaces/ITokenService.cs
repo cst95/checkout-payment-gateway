@@ -1,5 +1,6 @@
 ﻿using System;
 using PaymentGateway.API.Models;
+using PaymentGateway.API.Models.Entities;
 
 namespace PaymentGateway.API.Services.Interfaces
 {

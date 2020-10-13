@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using PaymentGateway.API.Data;
 using PaymentGateway.API.Models;
+using PaymentGateway.API.Models.Entities;
 using PaymentGateway.API.Services;
 
 namespace PaymentGateway.API.Extensions

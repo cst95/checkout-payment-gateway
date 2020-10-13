@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PaymentGateway.API.Data;
 using PaymentGateway.API.Models;
+using PaymentGateway.API.Models.Entities;
 using Serilog;
 
 namespace PaymentGateway.API.Extensions

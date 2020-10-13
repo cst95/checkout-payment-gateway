@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PaymentGateway.API.Extensions;
 using PaymentGateway.API.Models;
+using PaymentGateway.API.Models.Entities;
 using Serilog;
 
 namespace PaymentGateway.API

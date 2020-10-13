@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using PaymentGateway.API.Models;
+using PaymentGateway.API.Models.Entities;
 using PaymentGateway.API.Services.Interfaces;
 using Serilog;
 

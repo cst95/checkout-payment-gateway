@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Moq;
 using PaymentGateway.API.Models;
+using PaymentGateway.API.Models.Entities;
 using PaymentGateway.API.Services;
 using PaymentGateway.API.Services.Interfaces;
 using Xunit;
