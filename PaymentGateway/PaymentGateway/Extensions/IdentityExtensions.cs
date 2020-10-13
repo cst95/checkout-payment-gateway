@@ -12,13 +12,11 @@ namespace PaymentGateway.API.Extensions
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        public static IServiceCollection AddIdentity(this IServiceCollection services)
+        public static void AddIdentity(this IServiceCollection services)
         {
             services.AddIdentityCore<User>()
                 .AddSignInManager<SignInManager<User>>()
                 .AddEntityFrameworkStores<PaymentGatewayContext>();
-
-            return services;
         }
     }
 }

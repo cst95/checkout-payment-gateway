@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using PaymentGateway.API.Models;
@@ -13,16 +11,15 @@ namespace PaymentGateway.API.Services
 {
     public class TokenService : ITokenService
     {
-        private const string TokenKey = "TokenKey";
         private const int HoursUntilExpiry = 12;
 
-        private readonly IConfiguration _configuration;
         private readonly ILogger<TokenService> _logger;
+        private readonly ISigningKeyService _signingKeyService;
 
-        public TokenService(IConfiguration configuration, ILogger<TokenService> logger)
+        public TokenService(ILogger<TokenService> logger, ISigningKeyService signingKeyService)
         {
-            _configuration = configuration;
             _logger = logger;
+            _signingKeyService = signingKeyService;
         }
 
         public CreateTokenResponse CreateJsonWebToken(User user, DateTime currentUtcTime, int hoursUntilExpiry = HoursUntilExpiry)
@@ -35,9 +32,8 @@ namespace PaymentGateway.API.Services
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
             };
             
-            var signingKey = GetSigningKey();
+            var signingKey = _signingKeyService.GetSigningKey();
             var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha512Signature);
-            
             var expiresDate = currentUtcTime.AddHours(hoursUntilExpiry);
 
             var descriptor = new SecurityTokenDescriptor
@@ -50,6 +46,8 @@ namespace PaymentGateway.API.Services
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(descriptor);
             var jwt = tokenHandler.WriteToken(token);
+            
+            _logger.LogDebug("Json Web Token Created for {UserName}. Value: {Token}", user.UserName, jwt);
 
             return new CreateTokenResponse
             {
@@ -57,28 +55,6 @@ namespace PaymentGateway.API.Services
                 Expires = expiresDate,
                 Success = true
             };
-        }
-
-        private SymmetricSecurityKey GetSigningKey()
-        {
-            var tokenKey = _configuration[TokenKey];
-
-            if (string.IsNullOrWhiteSpace(tokenKey))
-            {
-                _logger.LogError("Invalid TokenKey or TokenKey not specified in configuration");
-                throw new KeyNotFoundException();
-            }
-
-            try
-            {
-                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
-                return securityKey;
-            }
-            catch (ArgumentOutOfRangeException exception)
-            {
-                _logger.LogError("TokenKey is not long enough. {Exception}", exception);
-                throw;
-            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace PaymentGateway.API.Extensions
         /// <param name="environment"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddApplicationServices(this IServiceCollection serviceCollection,
+        public static void AddApplicationServices(this IServiceCollection serviceCollection,
             IWebHostEnvironment environment, IConfiguration configuration)
         {
             serviceCollection.AddDbContext<PaymentGatewayContext>(options =>
@@ -29,9 +29,8 @@ namespace PaymentGateway.API.Extensions
                 }
 
                 serviceCollection.AddTransient<ITokenService, TokenService>();
+                serviceCollection.AddTransient<ISigningKeyService, SigningKeyService>();
             });
-
-            return serviceCollection;
         }
     }
 }
