@@ -14,14 +14,14 @@ namespace PaymentGateway.API.Extensions
         /// <summary>
         /// Add the core services to the DI container.
         /// </summary>
-        /// <param name="serviceCollection"></param>
+        /// <param name="services"></param>
         /// <param name="environment"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static void AddApplicationServices(this IServiceCollection serviceCollection,
+        public static void AddApplicationServices(this IServiceCollection services,
             IWebHostEnvironment environment, IConfiguration configuration)
         {
-            serviceCollection.AddDbContext<PaymentGatewayContext>(options =>
+            services.AddDbContext<PaymentGatewayContext>(options =>
             {
                 if (environment.IsDevelopment())
                 {
@@ -29,9 +29,9 @@ namespace PaymentGateway.API.Extensions
                 }
             });
             
-            serviceCollection.AddTransient<ITokenService, TokenService>();
-            serviceCollection.AddTransient<ISigningKeyService, SigningKeyService>();
-            serviceCollection.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<ISigningKeyService, SigningKeyService>();
+            services.AddTransient<IAccountService, AccountService>();
         }
     }
 }
