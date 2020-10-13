@@ -1,16 +1,15 @@
 ﻿using System.Threading.Tasks;
 using PaymentGateway.API.Models;
-using PaymentGateway.API.Models.Entities;
 
 namespace PaymentGateway.API.Interfaces
 {
-    public interface IPaymentsRepository
+    public interface IPaymentsService
     {
         /// <summary>
-        /// Save the payment to the backing store. 
+        /// Makes the payment gateway process the payment.
         /// </summary>
         /// <param name="paymentRequest"></param>
         /// <returns></returns>
-        Task<SavePaymentResult> SavePaymentAsync(SavePaymentRequest paymentRequest);
+        Task<ProcessPaymentResult> ProcessPaymentAsync(PaymentRequest paymentRequest);
     }
 }

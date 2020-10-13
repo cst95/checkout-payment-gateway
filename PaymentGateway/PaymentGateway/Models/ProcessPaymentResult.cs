@@ -2,10 +2,10 @@
 
 namespace PaymentGateway.API.Models
 {
-    public class SavePaymentResult
+    public class ProcessPaymentResult
     {
         /// <summary>
-        /// The resulting payment object.
+        /// Details of the payment along with a success indicator.
         /// </summary>
         public Payment Payment { get; set; }
     }

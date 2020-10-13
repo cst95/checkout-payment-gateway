@@ -33,6 +33,12 @@ namespace PaymentGateway.API.Extensions
             services.AddTransient<ISigningKeyService, SigningKeyService>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IPaymentsRepository, PaymentsRepository>();
+            services.AddTransient<IPaymentsService, PaymentsService>();
+
+            if (environment.IsDevelopment())
+            {
+                services.AddTransient<IAcquiringBank, FakeAcquiringBank>();
+            }
         }
     }
 }

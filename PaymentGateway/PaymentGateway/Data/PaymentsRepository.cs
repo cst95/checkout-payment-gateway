@@ -19,8 +19,10 @@ namespace PaymentGateway.API.Data
             _logger = logger;
         }
 
-        public async Task<SavePaymentResult> SavePaymentAsync(Payment payment)
+        public async Task<SavePaymentResult> SavePaymentAsync(SavePaymentRequest paymentRequest)
         {
+            var payment = GetPayment(paymentRequest);
+            
             await _dbContext.Payments.AddAsync(payment);
 
             try
@@ -29,22 +31,32 @@ namespace PaymentGateway.API.Data
             }
             catch (DbUpdateException exception)
             {
-                _logger.LogWarning("Failed to save payment to the database: {Payment}. {Exception}", payment, exception);
-                
-                return new SavePaymentResult
-                {
-                    Success = false,
-                    Payment = payment
-                };
+                _logger.LogWarning("Failed to save payment to the database: {Payment}. {Exception}", paymentRequest, exception);
             }
             
-            _logger.LogDebug("Payment successfully saved to the database: {Payment}", payment);
+            _logger.LogDebug("Payment successfully saved to the database: {Payment}", paymentRequest);
 
             return new SavePaymentResult
             {
-                Success = true,
                 Payment = payment
             };
         }
+        
+        private Payment GetPayment(SavePaymentRequest request) => new Payment
+        {
+            Card = new Card
+            {
+                Id = request.PaymentRequest.CardNumber,
+                ExpiryDate = request.PaymentRequest.CardExpiryDate,
+                Cvv = request.PaymentRequest.CardCvv
+            },
+            UserId = request.PaymentRequest.UserId,
+            DateTime = DateTime.UtcNow,
+            Id = request.AcquiringBankResponse.Id,
+            Success = request.AcquiringBankResponse.Success,
+            Amount = request.PaymentRequest.Amount,
+            CardId = request.PaymentRequest.CardNumber,
+            Currency = request.PaymentRequest.Currency
+        };
     }
 }
