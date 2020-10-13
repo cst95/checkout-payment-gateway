@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PaymentGateway.API.Data;
+using PaymentGateway.API.Interfaces;
 using PaymentGateway.API.Services;
 using PaymentGateway.API.Services.Interfaces;
 
@@ -32,6 +33,7 @@ namespace PaymentGateway.API.Extensions
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<ISigningKeyService, SigningKeyService>();
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IPaymentsRepository, PaymentsRepository>();
         }
     }
 }
