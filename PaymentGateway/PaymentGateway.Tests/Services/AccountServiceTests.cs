@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Moq;
-using PaymentGateway.API.Interfaces;
-using PaymentGateway.API.Models;
-using PaymentGateway.API.Models.Entities;
-using PaymentGateway.API.Services;
+using PaymentGateway.Interfaces;
+using PaymentGateway.Models;
+using PaymentGateway.Models.Entities;
+using PaymentGateway.Services;
 using Xunit;
 
 namespace PaymentGateway.Tests.Services

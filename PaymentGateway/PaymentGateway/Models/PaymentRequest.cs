@@ -1,7 +1,7 @@
-﻿using PaymentGateway.API.Interfaces;
-using PaymentGateway.API.Models.Entities;
+﻿using PaymentGateway.Interfaces;
+using PaymentGateway.Models.Entities;
 
-namespace PaymentGateway.API.Models
+namespace PaymentGateway.Models
 {
     public class PaymentRequest : IAcquiringBankRequest, IPaymentRequest
     {

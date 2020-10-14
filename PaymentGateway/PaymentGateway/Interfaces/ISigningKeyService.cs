@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 
-namespace PaymentGateway.API.Interfaces
+namespace PaymentGateway.Interfaces
 {
     public interface ISigningKeyService
     {

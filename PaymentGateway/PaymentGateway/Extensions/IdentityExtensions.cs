@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using PaymentGateway.API.Data;
-using PaymentGateway.API.Models;
-using PaymentGateway.API.Models.Entities;
-using PaymentGateway.API.Services;
+using PaymentGateway.Data;
+using PaymentGateway.Models;
+using PaymentGateway.Models.Entities;
+using PaymentGateway.Services;
 
-namespace PaymentGateway.API.Extensions
+namespace PaymentGateway.Extensions
 {
     public static class IdentityExtensions
     {

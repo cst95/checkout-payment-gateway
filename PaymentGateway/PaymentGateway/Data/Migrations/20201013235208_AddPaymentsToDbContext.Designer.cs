@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PaymentGateway.API.Data;
+using PaymentGateway.Data;
 
-namespace PaymentGateway.API.Data.Migrations
+namespace PaymentGateway.Data.Migrations
 {
     [DbContext(typeof(PaymentGatewayContext))]
     [Migration("20201013235208_AddPaymentsToDbContext")]
@@ -146,7 +146,7 @@ namespace PaymentGateway.API.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PaymentGateway.API.Models.Entities.Payment", b =>
+            modelBuilder.Entity("PaymentGateway.Models.Entities.Payment", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -185,7 +185,7 @@ namespace PaymentGateway.API.Data.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("PaymentGateway.API.Models.Entities.User", b =>
+            modelBuilder.Entity("PaymentGateway.Models.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -260,7 +260,7 @@ namespace PaymentGateway.API.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("PaymentGateway.API.Models.Entities.User", null)
+                    b.HasOne("PaymentGateway.Models.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -269,7 +269,7 @@ namespace PaymentGateway.API.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("PaymentGateway.API.Models.Entities.User", null)
+                    b.HasOne("PaymentGateway.Models.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -284,7 +284,7 @@ namespace PaymentGateway.API.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PaymentGateway.API.Models.Entities.User", null)
+                    b.HasOne("PaymentGateway.Models.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -293,16 +293,16 @@ namespace PaymentGateway.API.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("PaymentGateway.API.Models.Entities.User", null)
+                    b.HasOne("PaymentGateway.Models.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PaymentGateway.API.Models.Entities.Payment", b =>
+            modelBuilder.Entity("PaymentGateway.Models.Entities.Payment", b =>
                 {
-                    b.HasOne("PaymentGateway.API.Models.Entities.User", "User")
+                    b.HasOne("PaymentGateway.Models.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });

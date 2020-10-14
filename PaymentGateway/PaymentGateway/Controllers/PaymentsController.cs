@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using PaymentGateway.API.Interfaces;
-using PaymentGateway.API.Models;
-using PaymentGateway.API.Models.DTOs;
-using PaymentGateway.API.Models.Entities;
-using PaymentGateway.API.Services;
+using PaymentGateway.Interfaces;
+using PaymentGateway.Models;
+using PaymentGateway.Models.DTOs;
+using PaymentGateway.Models.Entities;
+using PaymentGateway.Services;
 
-namespace PaymentGateway.API.Controllers
+namespace PaymentGateway.Controllers
 {
     [Authorize]
     [ApiController]

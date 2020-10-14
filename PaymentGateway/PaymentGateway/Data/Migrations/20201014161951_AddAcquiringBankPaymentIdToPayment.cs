@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PaymentGateway.API.Data.Migrations
+namespace PaymentGateway.Data.Migrations
 {
     public partial class AddAcquiringBankPaymentIdToPayment : Migration
     {

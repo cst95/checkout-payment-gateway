@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PaymentGateway.API.Models
+namespace PaymentGateway.Models
 {
     public class LoginResponse
     {

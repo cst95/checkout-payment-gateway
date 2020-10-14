@@ -1,6 +1,6 @@
-﻿using PaymentGateway.API.Interfaces;
+﻿using PaymentGateway.Interfaces;
 
-namespace PaymentGateway.API.Models
+namespace PaymentGateway.Models
 {
     public class SavePaymentRequest
     {

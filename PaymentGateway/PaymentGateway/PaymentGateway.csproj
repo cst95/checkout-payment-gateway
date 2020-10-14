@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <RootNamespace>PaymentGateway.API</RootNamespace>
+        <RootNamespace>PaymentGateway</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

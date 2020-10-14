@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Moq;
-using PaymentGateway.API.Interfaces;
-using PaymentGateway.API.Models;
-using PaymentGateway.API.Models.Entities;
-using PaymentGateway.API.Services;
+using PaymentGateway.Interfaces;
+using PaymentGateway.Models.Entities;
+using PaymentGateway.Services;
 using Xunit;
 
 namespace PaymentGateway.Tests.Services

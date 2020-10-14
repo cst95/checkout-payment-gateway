@@ -11,12 +11,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using PaymentGateway.API.Extensions;
-using PaymentGateway.API.Models;
-using PaymentGateway.API.Models.Entities;
+using PaymentGateway.Extensions;
+using PaymentGateway.Models;
+using PaymentGateway.Models.Entities;
 using Serilog;
 
-namespace PaymentGateway.API
+namespace PaymentGateway
 {
     public class Startup
     {

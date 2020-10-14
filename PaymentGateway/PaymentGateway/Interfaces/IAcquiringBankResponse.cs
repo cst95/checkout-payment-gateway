@@ -1,4 +1,4 @@
-﻿namespace PaymentGateway.API.Interfaces
+﻿namespace PaymentGateway.Interfaces
 {
     public interface IAcquiringBankResponse
     {

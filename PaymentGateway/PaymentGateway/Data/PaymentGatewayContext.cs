@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using PaymentGateway.API.Models.Entities;
+using PaymentGateway.Models.Entities;
 
-namespace PaymentGateway.API.Data
+namespace PaymentGateway.Data
 {
     public class PaymentGatewayContext : IdentityDbContext<User>
     {

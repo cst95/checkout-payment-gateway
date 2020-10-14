@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 
-namespace PaymentGateway.API
+namespace PaymentGateway
 {
     public class Program
     {

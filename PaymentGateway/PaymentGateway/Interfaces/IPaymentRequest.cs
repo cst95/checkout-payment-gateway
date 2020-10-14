@@ -1,6 +1,6 @@
-﻿using PaymentGateway.API.Models.Entities;
+﻿using PaymentGateway.Models.Entities;
 
-namespace PaymentGateway.API.Interfaces
+namespace PaymentGateway.Interfaces
 {
     public interface IPaymentRequest
     {

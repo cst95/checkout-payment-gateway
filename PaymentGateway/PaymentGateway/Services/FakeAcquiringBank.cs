@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using PaymentGateway.API.Interfaces;
-using PaymentGateway.API.Models;
+using PaymentGateway.Interfaces;
+using PaymentGateway.Models;
 
-namespace PaymentGateway.API.Services
+namespace PaymentGateway.Services
 {
     public class FakeAcquiringBank : IAcquiringBank
     {

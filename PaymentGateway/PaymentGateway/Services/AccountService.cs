@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using PaymentGateway.API.Interfaces;
-using PaymentGateway.API.Models;
-using PaymentGateway.API.Models.Entities;
+using PaymentGateway.Interfaces;
+using PaymentGateway.Models;
+using PaymentGateway.Models.Entities;
 using Serilog;
 
-namespace PaymentGateway.API.Services
+namespace PaymentGateway.Services
 {
     public class AccountService : IAccountService
     {

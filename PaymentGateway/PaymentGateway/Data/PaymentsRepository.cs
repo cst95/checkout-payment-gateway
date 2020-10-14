@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using PaymentGateway.API.Interfaces;
-using PaymentGateway.API.Models;
-using PaymentGateway.API.Models.Entities;
+using PaymentGateway.Interfaces;
+using PaymentGateway.Models;
+using PaymentGateway.Models.Entities;
 
-namespace PaymentGateway.API.Data
+namespace PaymentGateway.Data
 {
     public class PaymentsRepository : IPaymentsRepository
     {

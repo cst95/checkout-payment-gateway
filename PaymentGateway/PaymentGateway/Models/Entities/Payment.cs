@@ -1,7 +1,7 @@
 ﻿using System;
-using PaymentGateway.API.Interfaces;
+using PaymentGateway.Interfaces;
 
-namespace PaymentGateway.API.Models.Entities
+namespace PaymentGateway.Models.Entities
 {
     public class Payment : IProcessedPayment
     {

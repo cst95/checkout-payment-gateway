@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PaymentGateway.API.Models.DTOs
+namespace PaymentGateway.Models.DTOs
 {
     public class LoginRequestDto
     {

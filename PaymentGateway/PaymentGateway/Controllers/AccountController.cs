@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PaymentGateway.API.Interfaces;
-using PaymentGateway.API.Models.DTOs;
+using PaymentGateway.Interfaces;
+using PaymentGateway.Models.DTOs;
 
-namespace PaymentGateway.API.Controllers
+namespace PaymentGateway.Controllers
 {
     [ApiController]
     [Route("[controller]")]

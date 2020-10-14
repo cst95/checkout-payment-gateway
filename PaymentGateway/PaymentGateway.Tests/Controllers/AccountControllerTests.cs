@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using PaymentGateway.API.Controllers;
-using PaymentGateway.API.Interfaces;
-using PaymentGateway.API.Models;
-using PaymentGateway.API.Models.DTOs;
+using PaymentGateway.Controllers;
+using PaymentGateway.Interfaces;
+using PaymentGateway.Models;
+using PaymentGateway.Models.DTOs;
 using Xunit;
 
 namespace PaymentGateway.Tests.Controllers

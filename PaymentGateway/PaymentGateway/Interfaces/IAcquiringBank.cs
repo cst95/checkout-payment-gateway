@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace PaymentGateway.API.Interfaces
+namespace PaymentGateway.Interfaces
 {
     public interface IAcquiringBank
     {

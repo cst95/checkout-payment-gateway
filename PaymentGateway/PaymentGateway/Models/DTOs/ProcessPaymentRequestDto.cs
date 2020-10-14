@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using PaymentGateway.API.Models.Entities;
+using PaymentGateway.Models.Entities;
 
-namespace PaymentGateway.API.Models.DTOs
+namespace PaymentGateway.Models.DTOs
 {
     // TODO: Implement validation of this class
     public class ProcessPaymentRequestDto

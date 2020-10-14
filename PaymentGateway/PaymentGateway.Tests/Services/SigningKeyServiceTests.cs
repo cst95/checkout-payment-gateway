@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
-using PaymentGateway.API.Services;
-using Serilog;
+using PaymentGateway.Services;
 using Xunit;
 
 namespace PaymentGateway.Tests.Services

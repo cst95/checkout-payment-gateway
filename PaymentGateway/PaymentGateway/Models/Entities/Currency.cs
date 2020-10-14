@@ -1,4 +1,4 @@
-﻿namespace PaymentGateway.API.Models.Entities
+﻿namespace PaymentGateway.Models.Entities
 {
     /// <summary>
     /// Example enum for currencies.
