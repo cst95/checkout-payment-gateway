@@ -6,8 +6,13 @@ namespace PaymentGateway.Domain.Services
 {
     public class PaymentsService : IPaymentsService
     {
-        public IUnprocessedPayment CreateUnprocessedPayment(IPaymentRequest paymentRequest) =>
-            new UnprocessedPayment
+        public IUnprocessedPayment CreateUnprocessedPayment(IPaymentRequest paymentRequest)
+        {
+            if (paymentRequest == null) throw new ArgumentNullException(nameof(paymentRequest));
+            
+            if(paymentRequest.User == null) throw new ArgumentException($"User property of {nameof(paymentRequest)} cannot be null");
+            
+            return new UnprocessedPayment
             {
                 Id = Guid.NewGuid().ToString(),
                 CardNumber = paymentRequest.CardNumber,
@@ -20,9 +25,13 @@ namespace PaymentGateway.Domain.Services
                 User = paymentRequest.User,
                 DateTime = DateTime.UtcNow
             };
+        }
+            
 
         public IProcessedPayment CreateProcessedPayment(IUnprocessedPayment unprocessedPayment, IAcquiringBankResponse acquiringBankResponse)
         {
+            if (unprocessedPayment == null) throw new ArgumentNullException(nameof(unprocessedPayment));
+            
             var processedPayment = new ProcessedPayment
             {
                 Id = unprocessedPayment.Id,
