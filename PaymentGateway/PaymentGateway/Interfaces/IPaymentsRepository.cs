@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using PaymentGateway.API.Models;
-using PaymentGateway.API.Models.Entities;
 
 namespace PaymentGateway.API.Interfaces
 {
@@ -9,8 +8,8 @@ namespace PaymentGateway.API.Interfaces
         /// <summary>
         /// Save the payment to the backing store. 
         /// </summary>
-        /// <param name="paymentRequest"></param>
+        /// <param name="payment"></param>
         /// <returns></returns>
-        Task<SavePaymentResult> SavePaymentAsync(SavePaymentRequest paymentRequest);
+        Task<SavePaymentResult> SaveProcessedPaymentAsync(IProcessedPayment payment);
     }
 }

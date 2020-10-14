@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PaymentGateway.API.Interfaces;
@@ -19,9 +18,9 @@ namespace PaymentGateway.API.Data
             _logger = logger;
         }
 
-        public async Task<SavePaymentResult> SavePaymentAsync(SavePaymentRequest paymentRequest)
+        public async Task<SavePaymentResult> SaveProcessedPaymentAsync(IProcessedPayment processedPayment)
         {
-            var payment = GetPayment(paymentRequest);
+            var payment = MapPayment(processedPayment);
             
             await _dbContext.Payments.AddAsync(payment);
 
@@ -31,30 +30,39 @@ namespace PaymentGateway.API.Data
             }
             catch (DbUpdateException exception)
             {
-                _logger.LogWarning("Failed to save payment to the database: {Payment}. {Exception}", paymentRequest, exception);
+                _logger.LogError("Failed to save payment to the database: {PaymentId}. {Exception}", payment.Id,
+                    exception);
+
+                return new SavePaymentResult
+                {
+                    Success = false,
+                    Payment = payment
+                };
             }
-            
-            _logger.LogDebug("Payment successfully saved to the database: {Payment}", paymentRequest);
+
+            _logger.LogInformation("Payment successfully saved to the database: {PaymentId}", payment.Id);
 
             return new SavePaymentResult
             {
+                Success = true,
                 Payment = payment
             };
         }
-        
-        private Payment GetPayment(SavePaymentRequest request) => new Payment
+
+        private Payment MapPayment(IProcessedPayment processedPayment) => new Payment
         {
-            Id = request.AcquiringBankResponse.Id,
-            Success = request.AcquiringBankResponse.Success,
-            CardNumber = request.PaymentRequest.CardNumber,
-            CardExpiryMonth = request.PaymentRequest.CardExpiryMonth,
-            CardExpiryYear = request.PaymentRequest.CardExpiryYear,
-            CardCvv = request.PaymentRequest.CardCvv,
-            Amount = request.PaymentRequest.Amount,
-            Currency = request.PaymentRequest.Currency,
-            UserId = request.PaymentRequest.User.Id,
-            User = request.PaymentRequest.User,
-            DateTime = DateTime.UtcNow
+            Id = processedPayment.Id,
+            CardNumber = processedPayment.CardNumber,
+            CardCvv = processedPayment.CardCvv,
+            CardExpiryMonth = processedPayment.CardExpiryMonth,
+            CardExpiryYear = processedPayment.CardExpiryYear,
+            Amount = processedPayment.Amount,
+            Currency = processedPayment.Currency,
+            UserId = processedPayment.User.Id,
+            User = processedPayment.User,
+            AcquiringBankPaymentId = processedPayment.AcquiringBankPaymentId,
+            DateTime = processedPayment.DateTime,
+            Success = processedPayment.Success
         };
     }
 }

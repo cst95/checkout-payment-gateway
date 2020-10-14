@@ -34,6 +34,7 @@ namespace PaymentGateway.API.Extensions
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IPaymentsRepository, PaymentsRepository>();
             services.AddTransient<IPaymentsService, PaymentsService>();
+            services.AddTransient<IPaymentProcessor, PaymentProcessor>();
 
             if (environment.IsDevelopment())
             {

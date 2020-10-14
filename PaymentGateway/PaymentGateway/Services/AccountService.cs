@@ -34,7 +34,7 @@ namespace PaymentGateway.API.Services
             
             if (!loginSuccess) return new LoginResponse();
 
-            _logger.LogDebug("User with username: {UserName} has successfully logged in.", user.UserName);
+            _logger.LogInformation("User with username: {UserName} has successfully logged in.", user.UserName);
             
             var tokenResponse = _tokenService.CreateJsonWebToken(user, DateTime.UtcNow);
 

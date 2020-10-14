@@ -1,11 +1,11 @@
 ﻿namespace PaymentGateway.API.Interfaces
 {
-    public interface IAcquiringBankResponse
+    public interface IProcessedPayment : IUnprocessedPayment
     {
         /// <summary>
-        /// The unique identifier issued by the acquiring bank.
+        /// The unique identifier supplied by the acquiring bank.
         /// </summary>
-        public string PaymentId { get; set; }
+        public string AcquiringBankPaymentId { get; set; }
         /// <summary>
         /// Indicates whether the payment was successful or not.
         /// </summary>

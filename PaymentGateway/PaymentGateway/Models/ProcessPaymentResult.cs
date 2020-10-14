@@ -1,12 +1,12 @@
-﻿using PaymentGateway.API.Models.Entities;
+﻿using PaymentGateway.API.Interfaces;
 
 namespace PaymentGateway.API.Models
 {
     public class ProcessPaymentResult
     {
         /// <summary>
-        /// Details of the payment along with a success indicator.
+        /// Details of the processed payment.
         /// </summary>
-        public Payment Payment { get; set; }
+        public IProcessedPayment Payment { get; set; }
     }
 }

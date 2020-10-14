@@ -1,16 +1,20 @@
-﻿using PaymentGateway.API.Interfaces;
+﻿using System;
+using PaymentGateway.API.Interfaces;
 using PaymentGateway.API.Models.Entities;
 
 namespace PaymentGateway.API.Models
 {
-    public class PaymentRequest : IAcquiringBankRequest, IPaymentRequest
+    public class UnprocessedPayment : IUnprocessedPayment
     {
+        public string Id { get; set; }
         public string CardNumber { get; set; }
+        public int CardCvv { get; set; }
         public int CardExpiryMonth { get; set; }
         public int CardExpiryYear { get; set; }
-        public int CardCvv { get; set; }
+        public string UserId { get; set; }
+        public User User { get; set; }
         public decimal Amount { get; set; }
         public Currency Currency { get; set; }
-        public User User { get; set; }
+        public DateTime DateTime { get; set; }
     }
 }

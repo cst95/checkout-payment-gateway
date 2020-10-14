@@ -1,5 +1,4 @@
-﻿using System;
-using PaymentGateway.API.Models.Entities;
+﻿using PaymentGateway.API.Models.Entities;
 
 namespace PaymentGateway.API.Interfaces
 {
@@ -18,7 +17,7 @@ namespace PaymentGateway.API.Interfaces
         /// </summary>
         public int CardExpiryYear { get; set; }
         /// <summary>
-        /// The 3 digit Cvv number of the card.
+        /// The CVV number of the card.
         /// </summary>
         int CardCvv { get; set; }
         /// <summary>

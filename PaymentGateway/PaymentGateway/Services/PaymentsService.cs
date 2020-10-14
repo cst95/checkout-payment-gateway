@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using System;
 using PaymentGateway.API.Interfaces;
 using PaymentGateway.API.Models;
 
@@ -6,30 +6,43 @@ namespace PaymentGateway.API.Services
 {
     public class PaymentsService : IPaymentsService
     {
-        private readonly IPaymentsRepository _paymentsRepository;
-        private readonly IAcquiringBank _acquiringBank;
-
-        public PaymentsService(IPaymentsRepository paymentsRepository, IAcquiringBank acquiringBank)
-        {
-            _paymentsRepository = paymentsRepository;
-            _acquiringBank = acquiringBank;
-        }
-        
-        public async Task<ProcessPaymentResult> ProcessPaymentAsync(PaymentRequest paymentRequest)
-        {
-            // TODO: Implement some decision here as to which acquiring bank implementation is used. Perhaps use factory pattern.
-            var acquiringBankResponse = await _acquiringBank.ProcessPaymentAsync(paymentRequest);
-            
-            var saveResult = await _paymentsRepository.SavePaymentAsync(new SavePaymentRequest
+        public IUnprocessedPayment CreateUnprocessedPayment(IPaymentRequest paymentRequest) =>
+            new UnprocessedPayment
             {
-                PaymentRequest = paymentRequest,
-                AcquiringBankResponse = acquiringBankResponse
-            });
-            
-            return new ProcessPaymentResult
-            {
-                Payment = saveResult.Payment
+                Id = Guid.NewGuid().ToString(),
+                CardNumber = paymentRequest.CardNumber,
+                CardExpiryMonth = paymentRequest.CardExpiryMonth,
+                CardExpiryYear = paymentRequest.CardExpiryYear,
+                CardCvv = paymentRequest.CardCvv,
+                Amount = paymentRequest.Amount,
+                Currency = paymentRequest.Currency,
+                UserId = paymentRequest.User.Id,
+                User = paymentRequest.User,
+                DateTime = DateTime.UtcNow
             };
+
+        public IProcessedPayment CreateProcessedPayment(IUnprocessedPayment unprocessedPayment, IAcquiringBankResponse acquiringBankResponse)
+        {
+            var processedPayment = new ProcessedPayment
+            {
+                Id = unprocessedPayment.Id,
+                CardNumber = unprocessedPayment.CardNumber,
+                CardCvv = unprocessedPayment.CardCvv,
+                CardExpiryMonth = unprocessedPayment.CardExpiryMonth,
+                CardExpiryYear = unprocessedPayment.CardExpiryYear,
+                Amount = unprocessedPayment.Amount,
+                Currency = unprocessedPayment.Currency,
+                UserId = unprocessedPayment.UserId,
+                User = unprocessedPayment.User,
+                DateTime = unprocessedPayment.DateTime
+            };
+            
+            if (acquiringBankResponse == null) return processedPayment;
+            
+            processedPayment.Success = acquiringBankResponse.Success;
+            processedPayment.AcquiringBankPaymentId = acquiringBankResponse.PaymentId;
+            
+            return processedPayment;
         }
     }
 }

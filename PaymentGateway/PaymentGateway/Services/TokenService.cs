@@ -46,7 +46,7 @@ namespace PaymentGateway.API.Services
             var token = tokenHandler.CreateToken(descriptor);
             var jwt = tokenHandler.WriteToken(token);
             
-            _logger.LogDebug("Json Web Token Created for {UserName}. Value: {Token}", user.UserName, jwt);
+            _logger.LogInformation("JSON Web Token Created for {UserName}. Value: {Token}", user.UserName, jwt);
 
             return new CreateTokenResponse
             {

@@ -1,4 +1,4 @@
-﻿using PaymentGateway.API.Models.Entities;
+﻿using PaymentGateway.API.Interfaces;
 
 namespace PaymentGateway.API.Models
 {
@@ -7,6 +7,10 @@ namespace PaymentGateway.API.Models
         /// <summary>
         /// The resulting payment object.
         /// </summary>
-        public Payment Payment { get; set; }
+        public IProcessedPayment Payment { get; set; }
+        /// <summary>
+        /// Indicates whether the payment was successfully saved.
+        /// </summary>
+        public bool Success { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using PaymentGateway.API.Interfaces;
 using PaymentGateway.API.Models;
 using PaymentGateway.API.Models.DTOs;
 using PaymentGateway.API.Models.Entities;
+using PaymentGateway.API.Services;
 
 namespace PaymentGateway.API.Controllers
 {
@@ -14,22 +15,23 @@ namespace PaymentGateway.API.Controllers
     [Route("[controller]")]
     public class PaymentsController : ControllerBase
     {
-        private readonly IPaymentsService _paymentsService;
         private readonly UserManager<User> _userManager;
+        private readonly IPaymentProcessor _paymentProcessor;
 
-        public PaymentsController(IPaymentsService paymentsService, UserManager<User> userManager)
+        public PaymentsController(UserManager<User> userManager, IPaymentProcessor paymentProcessor)
         {
-            _paymentsService = paymentsService;
             _userManager = userManager;
+            _paymentProcessor = paymentProcessor;
         }
 
         [HttpPost]
         public async Task<ActionResult<ProcessPaymentResponseDto>> ProcessPayment(
             [FromBody] ProcessPaymentRequestDto paymentRequestDto)
         {
+            // TODO: validate paymentRequestDto
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            var paymentResult = await _paymentsService.ProcessPaymentAsync(new PaymentRequest
+            var paymentResult = await _paymentProcessor.ProcessAsync(new PaymentRequest
             {
                 Amount = paymentRequestDto.Amount,
                 Currency = paymentRequestDto.Currency,

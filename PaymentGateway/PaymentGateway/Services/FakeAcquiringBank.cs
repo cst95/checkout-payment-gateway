@@ -11,8 +11,21 @@ namespace PaymentGateway.API.Services
         {
             return Task.FromResult<IAcquiringBankResponse>(new FakeAcquiringBankResponse
             {
-                Id = Guid.NewGuid().ToString(),
+                PaymentId = Guid.NewGuid().ToString(),
                 Success = true
+            });
+        }
+
+        public Task<IAcquiringBankRequest> CreateRequestAsync(IUnprocessedPayment unprocessedPayment)
+        {
+            return Task.FromResult<IAcquiringBankRequest>(new FakeAcquiringBankRequest
+            {
+                CardNumber = unprocessedPayment.CardNumber,
+                CardCvv = unprocessedPayment.CardCvv,
+                Amount = unprocessedPayment.Amount,
+                CardExpiryMonth = unprocessedPayment.CardExpiryMonth,
+                CardExpiryYear = unprocessedPayment.CardExpiryYear,
+                Currency = unprocessedPayment.Currency
             });
         }
     }

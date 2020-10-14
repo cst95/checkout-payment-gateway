@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PaymentGateway.API.Models.Entities;
 
 namespace PaymentGateway.API.Models.DTOs
 {
+    // TODO: Implement validation of this class
     public class ProcessPaymentRequestDto
     {
         [CreditCard]

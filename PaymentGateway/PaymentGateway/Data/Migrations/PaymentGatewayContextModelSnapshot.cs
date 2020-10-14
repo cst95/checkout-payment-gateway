@@ -149,6 +149,9 @@ namespace PaymentGateway.API.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("AcquiringBankPaymentId")
+                        .HasColumnType("TEXT");
+
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
