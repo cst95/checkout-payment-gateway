@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PaymentGateway.API.Models.DTOs
+namespace PaymentGateway.Models.DTOs
 {
     public class LoginResponseDto
     {

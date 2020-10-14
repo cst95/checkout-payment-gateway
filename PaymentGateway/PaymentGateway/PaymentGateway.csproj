@@ -2,20 +2,21 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <RootNamespace>PaymentGateway.API</RootNamespace>
+        <RootNamespace>PaymentGateway</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.9" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />
         <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.7.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Data\Migrations" />
+      <ProjectReference Include="..\PaymentGateway.Data\PaymentGateway.Data.csproj" />
+      <ProjectReference Include="..\PaymentGateway.Domain\PaymentGateway.Domain.csproj" />
     </ItemGroup>
 
 </Project>

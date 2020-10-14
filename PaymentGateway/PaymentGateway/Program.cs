@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 
-namespace PaymentGateway.API
+namespace PaymentGateway
 {
     public class Program
     {
@@ -16,9 +16,9 @@ namespace PaymentGateway.API
                     .Build()
                     .Run();
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Log.Fatal(ex, "An unhandled exception occurred.");
+                Log.Fatal(exception, "An unhandled exception occurred.");
             }
             finally
             {
@@ -31,7 +31,7 @@ namespace PaymentGateway.API
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
                 .UseSerilog((hostContext, logger) =>
                 {
-                    logger.MinimumLevel.Debug()
+                    logger.MinimumLevel.Information()
                         .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
                         .Enrich.FromLogContext()
                         .WriteTo.Console();

@@ -1,21 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using PaymentGateway.API.Extensions;
-using PaymentGateway.API.Models;
+using PaymentGateway.Data.Models.Entities;
+using PaymentGateway.Extensions;
 using Serilog;
 
-namespace PaymentGateway.API
+namespace PaymentGateway
 {
     public class Startup
     {
