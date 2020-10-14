@@ -14,8 +14,8 @@ namespace PaymentGateway.Domain.Interfaces
         /// <summary>
         /// Take an unprocessed payment and create the required acquiring bank request.
         /// </summary>
-        /// <param name="unprocessedPayment"></param>
+        /// <param name="paymentRequest"></param>
         /// <returns></returns>
-        Task<IAcquiringBankRequest> CreateRequestAsync(IUnprocessedPayment unprocessedPayment);
+        Task<IAcquiringBankRequest> CreateRequestAsync(IPaymentRequest paymentRequest);
     }
 }

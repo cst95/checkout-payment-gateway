@@ -9,6 +9,8 @@ namespace PaymentGateway.Domain.Services
     {
         public Task<IAcquiringBankResponse> ProcessPaymentAsync(IAcquiringBankRequest request)
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            
             return Task.FromResult<IAcquiringBankResponse>(new FakeAcquiringBankResponse
             {
                 PaymentId = Guid.NewGuid().ToString(),
@@ -16,8 +18,10 @@ namespace PaymentGateway.Domain.Services
             });
         }
 
-        public Task<IAcquiringBankRequest> CreateRequestAsync(IUnprocessedPayment unprocessedPayment)
+        public Task<IAcquiringBankRequest> CreateRequestAsync(IPaymentRequest unprocessedPayment)
         {
+            if (unprocessedPayment == null) throw new ArgumentNullException(nameof(unprocessedPayment));
+
             return Task.FromResult<IAcquiringBankRequest>(new FakeAcquiringBankRequest
             {
                 CardNumber = unprocessedPayment.CardNumber,

@@ -33,7 +33,7 @@ namespace PaymentGateway.Domain.Services
 
             try
             {
-                var acquiringBankRequest = await _acquiringBank.CreateRequestAsync(unprocessedPayment);
+                var acquiringBankRequest = await _acquiringBank.CreateRequestAsync(paymentRequest);
                 acquiringBankResponse = await _acquiringBank.ProcessPaymentAsync(acquiringBankRequest);
             }
             catch (Exception exception)
