@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PaymentGateway.Data.Models.Entities;
+using PaymentGateway.Domain.Interfaces;
 using PaymentGateway.Models;
 using PaymentGateway.Models.DTOs;
-using PaymentGateway.Services;
 
 namespace PaymentGateway.Controllers
 {

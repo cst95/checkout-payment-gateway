@@ -1,9 +1,9 @@
 ﻿using PaymentGateway.Data.Models.Entities;
 using PaymentGateway.Domain.Interfaces;
 
-namespace PaymentGateway.Models
+namespace PaymentGateway.Domain.Models
 {
-    public class PaymentRequest : IPaymentRequest
+    public class FakeAcquiringBankRequest : IAcquiringBankRequest
     {
         public string CardNumber { get; set; }
         public int CardExpiryMonth { get; set; }
@@ -11,6 +11,5 @@ namespace PaymentGateway.Models
         public int CardCvv { get; set; }
         public decimal Amount { get; set; }
         public Currency Currency { get; set; }
-        public User User { get; set; }
     }
 }

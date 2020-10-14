@@ -4,6 +4,7 @@ WORKDIR /source
 # copy csproj and restore as distinct layers
 COPY ./PaymentGateway/PaymentGateway.csproj ./PaymentGateway/PaymentGateway.csproj
 COPY ./PaymentGateway.Data/PaymentGateway.Data.csproj ./PaymentGateway.Data/PaymentGateway.Data.csproj
+COPY ./PaymentGateway.Domain/PaymentGateway.Domain.csproj ./PaymentGateway.Domain/PaymentGateway.Domain.csproj
 RUN dotnet restore ./PaymentGateway/PaymentGateway.csproj
 
 # copy and publish app and libraries

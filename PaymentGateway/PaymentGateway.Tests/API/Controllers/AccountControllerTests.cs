@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using PaymentGateway.Controllers;
-using PaymentGateway.Interfaces;
-using PaymentGateway.Models;
+using PaymentGateway.Domain.Interfaces;
+using PaymentGateway.Domain.Models;
 using PaymentGateway.Models.DTOs;
 using Xunit;
 

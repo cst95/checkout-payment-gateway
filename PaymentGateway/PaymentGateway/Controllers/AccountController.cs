@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PaymentGateway.Interfaces;
+using PaymentGateway.Domain.Interfaces;
 using PaymentGateway.Models.DTOs;
 
 namespace PaymentGateway.Controllers
