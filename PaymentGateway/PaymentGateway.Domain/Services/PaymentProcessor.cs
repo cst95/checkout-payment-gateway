@@ -12,11 +12,11 @@ namespace PaymentGateway.Domain.Services
     {
         private readonly IPaymentsRepository _paymentsRepository;
         private readonly IAcquiringBank _acquiringBank;
-        private readonly ILogger<PaymentsService> _logger;
+        private readonly ILogger<PaymentProcessor> _logger;
         private readonly IPaymentsService _paymentsService;
 
         public PaymentProcessor(IPaymentsRepository paymentsRepository, IAcquiringBank acquiringBank,
-            ILogger<PaymentsService> logger, IPaymentsService paymentsService)
+            ILogger<PaymentProcessor> logger, IPaymentsService paymentsService)
         {
             _paymentsRepository = paymentsRepository;
             _acquiringBank = acquiringBank;
@@ -27,13 +27,12 @@ namespace PaymentGateway.Domain.Services
         public async Task<ProcessPaymentResult> ProcessAsync(IPaymentRequest paymentRequest)
         {
             var unprocessedPayment = _paymentsService.CreateUnprocessedPayment(paymentRequest);
+            var acquiringBankRequest = await _acquiringBank.CreateRequestAsync(paymentRequest);
 
-            // TODO: Implement some decision here as to which acquiring bank implementation is used. Perhaps use factory pattern.
             IAcquiringBankResponse acquiringBankResponse = null;
-
+            
             try
             {
-                var acquiringBankRequest = await _acquiringBank.CreateRequestAsync(paymentRequest);
                 acquiringBankResponse = await _acquiringBank.ProcessPaymentAsync(acquiringBankRequest);
             }
             catch (Exception exception)
@@ -44,10 +43,11 @@ namespace PaymentGateway.Domain.Services
             }
 
             var processedPayment = _paymentsService.CreateProcessedPayment(unprocessedPayment, acquiringBankResponse);
+            var payment = CreatePayment(processedPayment);
+            
+            await _paymentsRepository.SavePaymentAsync(payment);
             
             _logger.LogInformation("Payment {paymentId} has successfully been processed.", processedPayment.Id);
-
-            await _paymentsRepository.SavePaymentAsync(CreatePayment(processedPayment));
 
             return new ProcessPaymentResult
             {

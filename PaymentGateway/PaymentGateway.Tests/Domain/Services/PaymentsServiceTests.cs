@@ -53,7 +53,7 @@ namespace PaymentGateway.Tests.Domain.Services
         [Fact]
         public void CreateUnprocessedPayment_WithValidRequest_CorrectlyMapsValues()
         {
-            var request = new PaymentRequest()
+            var request = new PaymentRequest
             {
                 CardNumber = "1111",
                 CardCvv = 111,
@@ -99,8 +99,11 @@ namespace PaymentGateway.Tests.Domain.Services
                 CardExpiryYear = 2020,
                 Amount = 12,
                 User = new User(),
-                UserId = "1"
+                UserId = "1",
+                DateTime = DateTime.Now,
+                Id = "1"
             };
+            
             var acquiringBankResponse = new FakeAcquiringBankResponse
             {
                 Success = true,
