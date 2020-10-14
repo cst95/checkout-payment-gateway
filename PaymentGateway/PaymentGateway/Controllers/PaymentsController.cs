@@ -27,7 +27,6 @@ namespace PaymentGateway.Controllers
         public async Task<ActionResult<ProcessPaymentResponseDto>> ProcessPayment(
             [FromBody] ProcessPaymentRequestDto paymentRequestDto)
         {
-            // TODO: validate paymentRequestDto
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
             var paymentResult = await _paymentProcessor.ProcessAsync(new PaymentRequest
