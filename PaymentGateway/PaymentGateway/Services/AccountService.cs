@@ -2,10 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using PaymentGateway.Data.Models.Entities;
 using PaymentGateway.Interfaces;
 using PaymentGateway.Models;
-using PaymentGateway.Models.Entities;
-using Serilog;
 
 namespace PaymentGateway.Services
 {

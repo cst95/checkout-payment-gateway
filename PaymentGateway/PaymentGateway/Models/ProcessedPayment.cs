@@ -1,6 +1,6 @@
 ﻿using System;
+using PaymentGateway.Data.Models.Entities;
 using PaymentGateway.Interfaces;
-using PaymentGateway.Models.Entities;
 
 namespace PaymentGateway.Models
 {

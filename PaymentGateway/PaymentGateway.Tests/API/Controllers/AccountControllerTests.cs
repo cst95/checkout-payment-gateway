@@ -7,7 +7,7 @@ using PaymentGateway.Models;
 using PaymentGateway.Models.DTOs;
 using Xunit;
 
-namespace PaymentGateway.Tests.Controllers
+namespace PaymentGateway.Tests.API.Controllers
 {
     public class AccountControllerTests
     {

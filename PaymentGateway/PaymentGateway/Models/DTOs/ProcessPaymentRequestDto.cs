@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using PaymentGateway.Models.Entities;
+using PaymentGateway.Data.Models.Entities;
 
 namespace PaymentGateway.Models.DTOs
 {
@@ -17,7 +17,6 @@ namespace PaymentGateway.Models.DTOs
         [Range(100, 9999, ErrorMessage = "CVV must be either 3 or 4 digits.")]
         public int Cvv { get; set; }
         
-  
         public decimal Amount { get; set; }
         
         [EnumDataType(typeof(Currency))]

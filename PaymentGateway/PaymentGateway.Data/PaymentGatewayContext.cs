@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using PaymentGateway.Models.Entities;
+using PaymentGateway.Data.Models.Entities;
 
 namespace PaymentGateway.Data
 {

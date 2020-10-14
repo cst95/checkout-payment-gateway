@@ -4,9 +4,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using PaymentGateway.Data.Models.Entities;
 using PaymentGateway.Interfaces;
 using PaymentGateway.Models;
-using PaymentGateway.Models.Entities;
 
 namespace PaymentGateway.Services
 {

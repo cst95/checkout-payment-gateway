@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using PaymentGateway.Interfaces;
-using PaymentGateway.Models;
-using PaymentGateway.Models.Entities;
+using PaymentGateway.Data.Interfaces;
+using PaymentGateway.Data.Models;
+using PaymentGateway.Data.Models.Entities;
 
-namespace PaymentGateway.Data
+namespace PaymentGateway.Data.Repositories
 {
     public class PaymentsRepository : IPaymentsRepository
     {
@@ -18,9 +18,8 @@ namespace PaymentGateway.Data
             _logger = logger;
         }
 
-        public async Task<SavePaymentResult> SaveProcessedPaymentAsync(IProcessedPayment processedPayment)
+        public async Task<SavePaymentResult> SavePaymentAsync(Payment payment)
         {
-            var payment = MapPayment(processedPayment);
             
             await _dbContext.Payments.AddAsync(payment);
 
@@ -48,21 +47,5 @@ namespace PaymentGateway.Data
                 Payment = payment
             };
         }
-
-        private Payment MapPayment(IProcessedPayment processedPayment) => new Payment
-        {
-            Id = processedPayment.Id,
-            CardNumber = processedPayment.CardNumber,
-            CardCvv = processedPayment.CardCvv,
-            CardExpiryMonth = processedPayment.CardExpiryMonth,
-            CardExpiryYear = processedPayment.CardExpiryYear,
-            Amount = processedPayment.Amount,
-            Currency = processedPayment.Currency,
-            UserId = processedPayment.User.Id,
-            User = processedPayment.User,
-            AcquiringBankPaymentId = processedPayment.AcquiringBankPaymentId,
-            DateTime = processedPayment.DateTime,
-            Success = processedPayment.Success
-        };
     }
 }

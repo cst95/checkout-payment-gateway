@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using PaymentGateway.Data.Interfaces;
+using PaymentGateway.Data.Models.Entities;
 using PaymentGateway.Interfaces;
 using PaymentGateway.Models;
 
@@ -45,12 +47,28 @@ namespace PaymentGateway.Services
             
             _logger.LogInformation("Payment {paymentId} has successfully been processed.", processedPayment.Id);
 
-            var saveResult = await _paymentsRepository.SaveProcessedPaymentAsync(processedPayment);
+            await _paymentsRepository.SavePaymentAsync(CreatePayment(processedPayment));
 
             return new ProcessPaymentResult
             {
-                Payment = saveResult.Payment
+                Payment = processedPayment
             };
         }
+
+        private Payment CreatePayment(IProcessedPayment processedPayment) => new Payment
+        {
+            Id = processedPayment.Id,
+            CardNumber = processedPayment.CardNumber,
+            CardCvv = processedPayment.CardCvv,
+            CardExpiryMonth = processedPayment.CardExpiryMonth,
+            CardExpiryYear = processedPayment.CardExpiryYear,
+            Amount = processedPayment.Amount,
+            Currency = processedPayment.Currency,
+            UserId = processedPayment.User.Id,
+            User = processedPayment.User,
+            AcquiringBankPaymentId = processedPayment.AcquiringBankPaymentId,
+            DateTime = processedPayment.DateTime,
+            Success = processedPayment.Success
+        };
     }
 }

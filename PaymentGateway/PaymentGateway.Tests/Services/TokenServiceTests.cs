@@ -4,8 +4,8 @@ using System.Text;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Moq;
+using PaymentGateway.Data.Models.Entities;
 using PaymentGateway.Interfaces;
-using PaymentGateway.Models.Entities;
 using PaymentGateway.Services;
 using Xunit;
 

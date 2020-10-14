@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PaymentGateway.Data;
+using PaymentGateway.Data.Interfaces;
+using PaymentGateway.Data.Repositories;
 using PaymentGateway.Interfaces;
 using PaymentGateway.Services;
 
@@ -25,10 +27,11 @@ namespace PaymentGateway.Extensions
             {
                 if (environment.IsDevelopment())
                 {
-                    options.UseSqlite(configuration.GetConnectionString("PaymentGateway"));
+                    options.UseSqlite(configuration.GetConnectionString("PaymentGateway"),
+                        builder => { builder.MigrationsAssembly("PaymentGateway.Data"); });
                 }
             });
-            
+
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<ISigningKeyService, SigningKeyService>();
             services.AddTransient<IAccountService, AccountService>();

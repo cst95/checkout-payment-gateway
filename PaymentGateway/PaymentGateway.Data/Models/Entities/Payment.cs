@@ -1,9 +1,8 @@
 ﻿using System;
-using PaymentGateway.Interfaces;
 
-namespace PaymentGateway.Models.Entities
+namespace PaymentGateway.Data.Models.Entities
 {
-    public class Payment : IProcessedPayment
+    public class Payment
     {
         public string Id { get; set; }
         public string CardNumber { get; set; }

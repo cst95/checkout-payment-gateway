@@ -1,4 +1,4 @@
-﻿namespace PaymentGateway.Tests.Controllers
+﻿namespace PaymentGateway.Tests.API.Controllers
 {
     public class PaymentsControllerTests
     {

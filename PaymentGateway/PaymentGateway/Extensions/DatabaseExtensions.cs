@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PaymentGateway.Data;
-using PaymentGateway.Models;
-using PaymentGateway.Models.Entities;
+using PaymentGateway.Data.Models.Entities;
 using Serilog;
 
 namespace PaymentGateway.Extensions

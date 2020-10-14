@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Data\Migrations" />
+      <ProjectReference Include="..\PaymentGateway.Data\PaymentGateway.Data.csproj" />
     </ItemGroup>
 
 </Project>

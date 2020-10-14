@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
-using PaymentGateway.Models;
+using PaymentGateway.Data.Models;
+using PaymentGateway.Data.Models.Entities;
 
-namespace PaymentGateway.Interfaces
+namespace PaymentGateway.Data.Interfaces
 {
     public interface IPaymentsRepository
     {
@@ -10,6 +11,6 @@ namespace PaymentGateway.Interfaces
         /// </summary>
         /// <param name="payment"></param>
         /// <returns></returns>
-        Task<SavePaymentResult> SaveProcessedPaymentAsync(IProcessedPayment payment);
+        Task<SavePaymentResult> SavePaymentAsync(Payment payment);
     }
 }
