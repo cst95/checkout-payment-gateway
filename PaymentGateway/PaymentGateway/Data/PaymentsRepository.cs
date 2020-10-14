@@ -44,20 +44,17 @@ namespace PaymentGateway.API.Data
         
         private Payment GetPayment(SavePaymentRequest request) => new Payment
         {
-            Card = new Card
-            {
-                Id = request.PaymentRequest.CardNumber,
-                ExpiryDate = request.PaymentRequest.CardExpiryDate,
-                Cvv = request.PaymentRequest.CardCvv
-            },
-            UserId = request.PaymentRequest.User.Id,
-            User = request.PaymentRequest.User,
-            DateTime = DateTime.UtcNow,
             Id = request.AcquiringBankResponse.Id,
             Success = request.AcquiringBankResponse.Success,
+            CardNumber = request.PaymentRequest.CardNumber,
+            CardExpiryMonth = request.PaymentRequest.CardExpiryMonth,
+            CardExpiryYear = request.PaymentRequest.CardExpiryYear,
+            CardCvv = request.PaymentRequest.CardCvv,
             Amount = request.PaymentRequest.Amount,
-            CardId = request.PaymentRequest.CardNumber,
-            Currency = request.PaymentRequest.Currency
+            Currency = request.PaymentRequest.Currency,
+            UserId = request.PaymentRequest.User.Id,
+            User = request.PaymentRequest.User,
+            DateTime = DateTime.UtcNow
         };
     }
 }

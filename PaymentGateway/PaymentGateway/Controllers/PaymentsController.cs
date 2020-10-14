@@ -35,7 +35,8 @@ namespace PaymentGateway.API.Controllers
                 Currency = paymentRequestDto.Currency,
                 CardCvv = paymentRequestDto.Cvv,
                 CardNumber = paymentRequestDto.CardNumber,
-                CardExpiryDate = paymentRequestDto.ExpiryDate,
+                CardExpiryMonth = paymentRequestDto.CardExpiryMonth,
+                CardExpiryYear = paymentRequestDto.CardExpiryYear,
                 User = user
             });
 

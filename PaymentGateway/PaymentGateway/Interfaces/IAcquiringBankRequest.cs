@@ -8,11 +8,15 @@ namespace PaymentGateway.API.Interfaces
         /// <summary>
         /// The unique card number.
         /// </summary>
-        int CardNumber { get; set; }
+        string CardNumber { get; set; }
         /// <summary>
-        /// The expiry date of the card.
+        /// The expiry month of the payment card.
         /// </summary>
-        DateTime CardExpiryDate { get; set; }
+        public int CardExpiryMonth { get; set; }
+        /// <summary>
+        /// The expiry year of the payment card.
+        /// </summary>
+        public int CardExpiryYear { get; set; }
         /// <summary>
         /// The 3 digit Cvv number of the card.
         /// </summary>

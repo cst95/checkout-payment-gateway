@@ -144,23 +144,6 @@ namespace PaymentGateway.API.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PaymentGateway.API.Models.Entities.Card", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Cvv")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("ExpiryDate")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cards");
-                });
-
             modelBuilder.Entity("PaymentGateway.API.Models.Entities.Payment", b =>
                 {
                     b.Property<string>("Id")
@@ -169,8 +152,17 @@ namespace PaymentGateway.API.Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("CardId")
+                    b.Property<int>("CardCvv")
                         .HasColumnType("INTEGER");
+
+                    b.Property<int>("CardExpiryMonth")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CardExpiryYear")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CardNumber")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Currency")
                         .HasColumnType("INTEGER");
@@ -185,8 +177,6 @@ namespace PaymentGateway.API.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CardId");
 
                     b.HasIndex("UserId");
 
@@ -310,12 +300,6 @@ namespace PaymentGateway.API.Data.Migrations
 
             modelBuilder.Entity("PaymentGateway.API.Models.Entities.Payment", b =>
                 {
-                    b.HasOne("PaymentGateway.API.Models.Entities.Card", "Card")
-                        .WithMany()
-                        .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("PaymentGateway.API.Models.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
