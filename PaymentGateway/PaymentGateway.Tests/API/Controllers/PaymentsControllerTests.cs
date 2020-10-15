@@ -62,7 +62,15 @@ namespace PaymentGateway.Tests.API.Controllers
                     }
                 });
 
-            var result = await _paymentsController.ProcessPayment(new ProcessPaymentRequestDto());
+            var result = await _paymentsController.ProcessPayment(new ProcessPaymentRequestDto
+            {
+                Currency = Currency.USD,
+                CardNumber = "1234",
+                CardExpiryMonth = 12,
+                CardExpiryYear = 2020,
+                Cvv = 123,
+                Amount = 12
+            });
 
             var actionResult = Assert.IsType<ActionResult<ProcessPaymentResponseDto>>(result);
             var okResult = Assert.IsType<OkObjectResult>(actionResult.Result);
