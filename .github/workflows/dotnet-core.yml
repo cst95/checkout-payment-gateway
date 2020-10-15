@@ -20,7 +20,7 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore .\PaymentGateway\PaymentGateway.sln
     - name: Build
       run: dotnet build .\PaymentGateway\PaymentGateway.sln --configuration Release --no-restore
     - name: Test
