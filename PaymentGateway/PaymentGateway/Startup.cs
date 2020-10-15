@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PaymentGateway.Data.Models.Entities;
 using PaymentGateway.Extensions;
+using PaymentGateway.Middleware;
 using Serilog;
 
 namespace PaymentGateway
@@ -31,6 +32,8 @@ namespace PaymentGateway
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<User> userManager)
         {
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
+            
             if (env.IsDevelopment())
             {
                 app.CreateDevelopmentDatabase();
@@ -38,8 +41,6 @@ namespace PaymentGateway
             }
 
             app.UseSerilogRequestLogging();
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 

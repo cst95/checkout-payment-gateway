@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.Logging;
 using Moq;
 using PaymentGateway.Data.Interfaces;
 using PaymentGateway.Data.Models.Entities;
@@ -17,8 +18,9 @@ namespace PaymentGateway.Tests.Domain.Services
         
         public PaymentsServiceTests()
         {
+            var loggerMock = new Mock<ILogger<PaymentsService>>();
             _paymentsRepositoryMock = new Mock<IPaymentsRepository>();
-            _paymentsService = new PaymentsService(_paymentsRepositoryMock.Object);
+            _paymentsService = new PaymentsService(_paymentsRepositoryMock.Object, loggerMock.Object);
         }
         
         [Fact]
@@ -104,7 +106,7 @@ namespace PaymentGateway.Tests.Domain.Services
                 Amount = 12,
                 User = new User(),
                 UserId = "1",
-                DateTime = DateTime.Now,
+                CreatedAt = DateTime.Now,
                 Id = "1"
             };
             
@@ -121,7 +123,7 @@ namespace PaymentGateway.Tests.Domain.Services
             Assert.Equal(unprocessedPayment.Id, result.Id);
             Assert.Equal(unprocessedPayment.CardCvv, result.CardCvv);
             Assert.Equal(unprocessedPayment.CardNumber, result.CardNumber);
-            Assert.Equal(unprocessedPayment.DateTime, result.DateTime);
+            Assert.Equal(unprocessedPayment.CreatedAt, result.CreatedAt);
             Assert.Equal(unprocessedPayment.UserId, result.UserId);
             Assert.Equal(unprocessedPayment.CardExpiryMonth, result.CardExpiryMonth);
             Assert.Equal(unprocessedPayment.CardExpiryYear, result.CardExpiryYear);
@@ -179,7 +181,7 @@ namespace PaymentGateway.Tests.Domain.Services
                 CardExpiryMonth = 12,
                 CardExpiryYear = 2020,
                 CardNumber = "1234",
-                DateTime = DateTime.Now,
+                CreatedAt = DateTime.Now,
                 Success = true,
                 User = new User {Id = userId},
                 UserId = userId
@@ -197,7 +199,7 @@ namespace PaymentGateway.Tests.Domain.Services
             Assert.Equal(payment.UserId, result.UserId);
             Assert.Equal(payment.CardCvv, result.CardCvv);
             Assert.Equal(payment.CardNumber, result.CardNumber);
-            Assert.Equal(payment.DateTime, result.DateTime);
+            Assert.Equal(payment.CreatedAt, result.CreatedAt);
             Assert.Equal(payment.CardExpiryMonth, result.CardExpiryMonth);
             Assert.Equal(payment.CardExpiryYear, result.CardExpiryYear);
         }

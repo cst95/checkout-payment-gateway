@@ -58,7 +58,7 @@ namespace PaymentGateway.Tests.Domain.Services
             Assert.True(mockResult.User.Equals(result.Payment.User));
             Assert.Equal(mockResult.CardCvv, result.Payment.CardCvv);
             Assert.Equal(mockResult.CardNumber, result.Payment.CardNumber);
-            Assert.Equal(mockResult.DateTime, result.Payment.DateTime);
+            Assert.Equal(mockResult.CreatedAt, result.Payment.CreatedAt);
             Assert.Equal(mockResult.UserId, result.Payment.UserId);
             Assert.Equal(mockResult.CardExpiryMonth, result.Payment.CardExpiryMonth);
             Assert.Equal(mockResult.CardExpiryYear, result.Payment.CardExpiryYear);
@@ -116,7 +116,7 @@ namespace PaymentGateway.Tests.Domain.Services
                     Amount = 12,
                     User = new User(),
                     UserId = "1",
-                    DateTime = DateTime.Now,
+                    CreatedAt = DateTime.Now,
                     Id = "1"
                 });
 
@@ -133,7 +133,7 @@ namespace PaymentGateway.Tests.Domain.Services
                     User = new User(),
                     UserId = "1",
                     Success = true,
-                    DateTime = DateTime.Now,
+                    CreatedAt = DateTime.Now,
                     Id = "1",
                     AcquiringBankPaymentId = "1"
                 }

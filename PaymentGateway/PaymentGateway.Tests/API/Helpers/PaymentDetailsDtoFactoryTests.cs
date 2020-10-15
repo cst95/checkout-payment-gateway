@@ -28,7 +28,7 @@ namespace PaymentGateway.Tests.API.Helpers
                 Success = true,
                 UserId = "1234",
                 Amount = 12,
-                DateTime = DateTime.Now,
+                CreatedAt = DateTime.Now,
                 Id = "1234"
             };
 
@@ -38,7 +38,7 @@ namespace PaymentGateway.Tests.API.Helpers
             Assert.Equal(paymentDetails.Currency, result.Currency);
             Assert.Equal(paymentDetails.Id, result.PaymentId);
             Assert.Equal(paymentDetails.Success, result.Success);
-            Assert.Equal(paymentDetails.DateTime, result.PaymentCreatedAt);
+            Assert.Equal(paymentDetails.CreatedAt, result.PaymentCreatedAt);
             Assert.Equal(paymentDetails.CardCvv, result.CardDetails.Cvv);
             Assert.Equal(paymentDetails.CardExpiryMonth, result.CardDetails.ExpiryMonth);
             Assert.Equal(paymentDetails.CardExpiryYear, result.CardDetails.ExpiryYear);

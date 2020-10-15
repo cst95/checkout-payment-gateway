@@ -8,9 +8,9 @@ using Serilog;
 
 namespace PaymentGateway.Extensions
 {
-    public static class DataServiceCollectionExtensions
+    public static class DataApplicationBuilderExtensions
     {
-        private static readonly ILogger Log = Serilog.Log.ForContext(typeof(DataServiceCollectionExtensions));
+        private static readonly ILogger Log = Serilog.Log.ForContext(typeof(DataApplicationBuilderExtensions));
         
         /// <summary>
         /// Runs outstanding database migrations to ensure the database is setup in startup.

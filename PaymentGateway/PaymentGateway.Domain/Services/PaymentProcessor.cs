@@ -29,25 +29,29 @@ namespace PaymentGateway.Domain.Services
             var unprocessedPayment = _paymentsService.CreateUnprocessedPayment(paymentRequest);
             var acquiringBankRequest = await _acquiringBank.CreateRequestAsync(paymentRequest);
 
+            _logger.LogInformation("Begun processing payment {PaymentId}.", unprocessedPayment.Id);
+
             IAcquiringBankResponse acquiringBankResponse = null;
-            
+
             try
             {
                 acquiringBankResponse = await _acquiringBank.ProcessPaymentAsync(acquiringBankRequest);
+                _logger.LogInformation("The acquiring bank has processed the payment {PaymentId} without error.",
+                    unprocessedPayment.Id);
             }
             catch (Exception exception)
             {
                 _logger.LogError(
-                    "Exception occured whilst the acquiring bank was processing payment {paymentId}. {Exception}",
+                    "Exception occured whilst the acquiring bank was processing payment {PaymentId}. {Exception}",
                     unprocessedPayment.Id, exception);
             }
 
             var processedPayment = _paymentsService.CreateProcessedPayment(unprocessedPayment, acquiringBankResponse);
             var payment = CreatePayment(processedPayment);
-            
+
             await _paymentsRepository.SavePaymentAsync(payment);
-            
-            _logger.LogInformation("Payment {paymentId} has successfully been processed.", processedPayment.Id);
+
+            _logger.LogInformation("Payment {PaymentId} has successfully been processed.", processedPayment.Id);
 
             return new ProcessPaymentResult
             {
@@ -67,7 +71,7 @@ namespace PaymentGateway.Domain.Services
             UserId = processedPayment.User.Id,
             User = processedPayment.User,
             AcquiringBankPaymentId = processedPayment.AcquiringBankPaymentId,
-            DateTime = processedPayment.DateTime,
+            CreatedAt = processedPayment.CreatedAt,
             Success = processedPayment.Success
         };
     }

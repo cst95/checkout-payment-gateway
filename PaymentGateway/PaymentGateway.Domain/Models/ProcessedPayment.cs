@@ -17,6 +17,6 @@ namespace PaymentGateway.Domain.Models
         public Currency Currency { get; set; }
         public string AcquiringBankPaymentId { get; set; }
         public bool Success { get; set; }
-        public DateTime DateTime { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

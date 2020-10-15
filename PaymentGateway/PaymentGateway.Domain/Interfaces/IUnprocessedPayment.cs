@@ -44,6 +44,6 @@ namespace PaymentGateway.Domain.Interfaces
         /// <summary>
         /// The time at which the payment is created.
         /// </summary>
-        DateTime DateTime { get; set; }
+        DateTime CreatedAt { get; set; }
     }
 }
