@@ -9,6 +9,7 @@ using PaymentGateway.Data.Repositories;
 using PaymentGateway.Domain.Interfaces;
 using PaymentGateway.Domain.Services;
 using PaymentGateway.Helpers;
+using PaymentGateway.Interfaces;
 
 namespace PaymentGateway.Extensions
 {

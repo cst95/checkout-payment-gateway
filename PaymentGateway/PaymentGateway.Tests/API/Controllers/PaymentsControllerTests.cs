@@ -8,6 +8,7 @@ using PaymentGateway.Data.Models.Entities;
 using PaymentGateway.Domain.Interfaces;
 using PaymentGateway.Domain.Models;
 using PaymentGateway.Helpers;
+using PaymentGateway.Interfaces;
 using PaymentGateway.Models;
 using PaymentGateway.Models.DTOs;
 using Xunit;

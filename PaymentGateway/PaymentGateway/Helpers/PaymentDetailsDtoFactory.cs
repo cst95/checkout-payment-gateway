@@ -1,4 +1,5 @@
 ﻿using PaymentGateway.Domain.Models;
+using PaymentGateway.Interfaces;
 using PaymentGateway.Models.DTOs;
 
 namespace PaymentGateway.Helpers
