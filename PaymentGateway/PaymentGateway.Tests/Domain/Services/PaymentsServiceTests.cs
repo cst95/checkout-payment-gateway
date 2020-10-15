@@ -1,4 +1,6 @@
 ﻿using System;
+using Moq;
+using PaymentGateway.Data.Interfaces;
 using PaymentGateway.Data.Models.Entities;
 using PaymentGateway.Domain.Interfaces;
 using PaymentGateway.Domain.Models;
@@ -11,10 +13,12 @@ namespace PaymentGateway.Tests.Domain.Services
     public class PaymentsServiceTests
     {
         private readonly PaymentsService _paymentsService;
+        private readonly Mock<IPaymentsRepository> _paymentsRepositoryMock;
         
         public PaymentsServiceTests()
         {
-            _paymentsService = new PaymentsService();
+            _paymentsRepositoryMock = new Mock<IPaymentsRepository>();
+            _paymentsService = new PaymentsService(_paymentsRepositoryMock.Object);
         }
         
         [Fact]

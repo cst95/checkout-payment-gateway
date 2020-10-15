@@ -14,7 +14,7 @@ namespace PaymentGateway.Domain.Services
             return Task.FromResult<IAcquiringBankResponse>(new FakeAcquiringBankResponse
             {
                 PaymentId = Guid.NewGuid().ToString(),
-                Success = true
+                Success = request.Amount < 500
             });
         }
 

@@ -58,7 +58,7 @@ namespace PaymentGateway.Tests.Domain.Services
         }
 
         [Fact]
-        public async void ProcessPaymentAsync_WithValidParameter_ReturnsValidResponse()
+        public async void ProcessPaymentAsync_RequestAmountGreaterThan500_ReturnsSuccessFalse()
         {
             var request = new FakeAcquiringBankRequest
             {
@@ -67,7 +67,26 @@ namespace PaymentGateway.Tests.Domain.Services
                 Currency = Currency.GBP,
                 CardExpiryMonth = 2,
                 CardExpiryYear = 2020,
-                Amount = 12
+                Amount = 501
+            };
+            
+            var result = await _fakeAcquiringBank.ProcessPaymentAsync(request);
+            
+            Assert.False(result.Success);
+            Assert.NotNull(result.PaymentId);
+        }
+        
+        [Fact]
+        public async void ProcessPaymentAsync_RequestAmountLessThan500_ReturnsSuccessTrue()
+        {
+            var request = new FakeAcquiringBankRequest
+            {
+                CardNumber = "1111",
+                CardCvv = 111,
+                Currency = Currency.GBP,
+                CardExpiryMonth = 2,
+                CardExpiryYear = 2020,
+                Amount = 200
             };
             
             var result = await _fakeAcquiringBank.ProcessPaymentAsync(request);
