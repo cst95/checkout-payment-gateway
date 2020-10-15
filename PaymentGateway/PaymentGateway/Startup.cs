@@ -28,6 +28,7 @@ namespace PaymentGateway
             services.AddApplicationServices(Environment, Configuration);
             services.AddIdentity();
             services.AddAuthenticationSetup(Configuration);
+            services.AddCustomSwagger();
             
             services.AddControllers()
                 .AddFluentValidation(fv =>
@@ -55,6 +56,8 @@ namespace PaymentGateway
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            
+            app.UseCustomSwagger();
         }
     }
 }
