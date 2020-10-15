@@ -86,7 +86,7 @@ The `token` property can be used to authenticate requests to other endpoints, an
 
 #### Processing a payment
 
-In order to process a payment with the API, use the `POST /api/payments` endpoint with the following example request body:
+In order to process a payment with the API, use the `POST /api/payments` endpoint with the following example request body. Note that all request properties must be supplied and additional validations (that the card number is valid for example) are applied on each property using Fluent Validation.
    
 ```
 {
