@@ -49,7 +49,7 @@ The application has three core pieces of functionality:
 
 1. Requesting a JSON web token from the API
 2. Processing a payment using the API.
-3. Retreiving a payment's details using the API.
+3. Retrieving a payment's details using the API.
 
 In order to run the application locally you will either require the .NET Core 3.1 SDK or Docker installed on your machine. The application is currently only setup to run using HTTP (not HTTPS) and in the Development environment.
 
@@ -112,7 +112,7 @@ If successful, you should receive the following response with a different `payme
 
 The `success` property indicates whether the payment was successful and the `paymentId` can be used with the `GET /api/payments/{paymentId}` endpoint to retrieve the details of the payment. Note that if you use an amount greater than 500, the acquiring bank will fail the payment and `success` will be `false`.
 
-#### Retreiving a payment's details
+#### Retrieving a payment's details
 
  In order to retrieve details of a previous payment use the `GET /api/payments/{paymentId}` endpoint, supplying the `paymentId` returned in the previous step. For example `GET /api/payments/3b95476d-af21-4f2b-a6c5-45c9ed3ee530`. If authenticated as the same user who created the payment you should get a response containing the details of the payment like below:
 
