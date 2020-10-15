@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PaymentGateway.Data.Models.Entities;
 using PaymentGateway.Domain.Interfaces;
-using PaymentGateway.Helpers;
 using PaymentGateway.Interfaces;
 using PaymentGateway.Models;
 using PaymentGateway.Models.DTOs;
@@ -39,12 +38,12 @@ namespace PaymentGateway.Controllers
 
             var paymentResult = await _paymentProcessor.ProcessAsync(new PaymentRequest
             {
-                Amount = paymentRequestDto.Amount,
-                Currency = paymentRequestDto.Currency,
-                CardCvv = paymentRequestDto.Cvv,
+                Amount = paymentRequestDto.Amount.Value,
+                Currency = paymentRequestDto.Currency.Value,
+                CardCvv = paymentRequestDto.Cvv.Value,
                 CardNumber = paymentRequestDto.CardNumber,
-                CardExpiryMonth = paymentRequestDto.CardExpiryMonth,
-                CardExpiryYear = paymentRequestDto.CardExpiryYear,
+                CardExpiryMonth = paymentRequestDto.CardExpiryMonth.Value,
+                CardExpiryYear = paymentRequestDto.CardExpiryYear.Value,
                 User = user
             });
 

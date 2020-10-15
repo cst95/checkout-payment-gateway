@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -21,19 +22,25 @@ namespace PaymentGateway
 
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment Environment { get; }
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices(Environment, Configuration);
-            services.AddControllers();
             services.AddIdentity();
             services.AddAuthenticationSetup(Configuration);
+            
+            services.AddControllers()
+                .AddFluentValidation(fv =>
+                {
+                    fv.RegisterValidatorsFromAssemblyContaining<Startup>();
+                    fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+                });
         }
-        
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<User> userManager)
         {
             app.UseMiddleware<ExceptionHandlingMiddleware>();
-            
+
             if (env.IsDevelopment())
             {
                 app.CreateDevelopmentDatabase();
