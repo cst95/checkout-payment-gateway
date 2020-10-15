@@ -34,6 +34,7 @@ The following assumptions have been made whilst developing the Payment Gateway a
 - It acceptable to store full card details in the database.
 - Password validation is sufficient for logging in (ignoring email verification/multi factor authentication).
 - It is acceptable for multiple users to use the same card details.
+- All DateTimes are expressed in UTC.
 
 #### Mocking the acquiring bank
 
