@@ -59,6 +59,8 @@ To run the application using Docker Compose you can run `docker-compose up` from
 
 There are two test users with usernames **Test** and **Test2**. They both have the same password **Password123!**. They can be used to test the functionality of the API.
 
+Once the application is up and running, the Swagger documentation can be found at **http://localhost:5000/swagger**. You can use these pages to test your requests.
+
 #### Obtaining a JSON Web Token for authentication
 
 In order to generate a JSON web token for either test user, use the `POST /api/account/login` endpoint with the credentials for either account:
