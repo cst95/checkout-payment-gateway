@@ -14,7 +14,7 @@ Welcome to my solution to the .NET payment gateway challenge. The solution is sp
 - ASP .NET Core Identity integration with two seeded test accounts.
 - JSON Web Token authentication.
 - Entity Framework Core for data storage (Sqlite provider for development).
-- Containerisation with Docker and Docker Compose.
+- Containerization with Docker and Docker Compose.
 - Application logging with Serilog.
 - PCI Compliant card number masking when retrieving payment details.
 - Model validation using Fluent Validation.
@@ -31,8 +31,8 @@ The following assumptions have been made whilst developing the Payment Gateway a
 - Currency is represented by an enum (only GBP = 0, USD = 1 and EUR = 2 are included).
 - All payments are processed by the same acquiring bank.
 - Users can only access details for their own payments.
-- It acceptable to store full card details in the database.
-- Password validation is sufficient for logging in (ignoring email verification/multi factor authentication).
+- It is acceptable to store full card details in the database.
+- Password validation is sufficient for logging in (ignoring email verification/multi-factor authentication).
 - It is acceptable for multiple users to use the same card details.
 - All DateTimes are expressed in UTC.
 
@@ -114,7 +114,7 @@ The `success` property indicates whether the payment was successful and the `pay
 
 #### Retrieving a payment's details
 
- In order to retrieve details of a previous payment use the `GET /api/payments/{paymentId}` endpoint, supplying the `paymentId` returned in the previous step. For example `GET /api/payments/3b95476d-af21-4f2b-a6c5-45c9ed3ee530`. If authenticated as the same user who created the payment you should get a response containing the details of the payment like below:
+ In order to retrieve details of a previous payment use the `GET /api/payments/{paymentId}` endpoint, supplying the `paymentId` returned by the previous step. For example `GET /api/payments/3b95476d-af21-4f2b-a6c5-45c9ed3ee530`. If authenticated as the same user who created the payment you should get a response containing the details of the payment like below:
 
 ```
 {
