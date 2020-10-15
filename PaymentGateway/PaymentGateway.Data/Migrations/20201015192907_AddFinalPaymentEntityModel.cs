@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PaymentGateway.Data.Migrations
 {
-    public partial class AddPaymentsToDbContext : Migration
+    public partial class AddFinalPaymentEntityModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,8 +19,9 @@ namespace PaymentGateway.Data.Migrations
                     UserId = table.Column<string>(nullable: true),
                     Amount = table.Column<decimal>(nullable: false),
                     Currency = table.Column<int>(nullable: false),
+                    AcquiringBankPaymentId = table.Column<string>(nullable: true),
                     Success = table.Column<bool>(nullable: false),
-                    DateTime = table.Column<DateTime>(nullable: false)
+                    CreatedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

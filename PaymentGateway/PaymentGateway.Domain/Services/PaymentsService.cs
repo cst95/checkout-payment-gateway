@@ -33,7 +33,7 @@ namespace PaymentGateway.Domain.Services
                 Currency = paymentRequest.Currency,
                 UserId = paymentRequest.User.Id,
                 User = paymentRequest.User,
-                DateTime = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow
             };
         }
 
@@ -52,7 +52,7 @@ namespace PaymentGateway.Domain.Services
                 Currency = unprocessedPayment.Currency,
                 UserId = unprocessedPayment.UserId,
                 User = unprocessedPayment.User,
-                DateTime = unprocessedPayment.DateTime
+                CreatedAt = unprocessedPayment.CreatedAt
             };
             
             if (acquiringBankResponse == null) return processedPayment;
@@ -77,7 +77,7 @@ namespace PaymentGateway.Domain.Services
                 CardExpiryYear = result.CardExpiryYear,
                 CardNumber = result.CardNumber,
                 Currency = result.Currency,
-                DateTime = result.DateTime,
+                CreatedAt = result.CreatedAt,
                 Id = result.Id,
                 Success = result.Success,
                 UserId = result.UserId

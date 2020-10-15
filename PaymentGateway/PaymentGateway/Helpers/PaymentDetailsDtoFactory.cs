@@ -19,7 +19,7 @@ namespace PaymentGateway.Helpers
                 Amount = payment.Amount,
                 Currency = payment.Currency,
                 Success = payment.Success,
-                PaymentCreatedAt = payment.DateTime,
+                PaymentCreatedAt = payment.CreatedAt,
                 CardDetails = GetCardDetailsDto(payment)
             };
 

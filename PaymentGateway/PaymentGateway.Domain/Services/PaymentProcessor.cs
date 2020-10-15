@@ -67,7 +67,7 @@ namespace PaymentGateway.Domain.Services
             UserId = processedPayment.User.Id,
             User = processedPayment.User,
             AcquiringBankPaymentId = processedPayment.AcquiringBankPaymentId,
-            DateTime = processedPayment.DateTime,
+            CreatedAt = processedPayment.CreatedAt,
             Success = processedPayment.Success
         };
     }
