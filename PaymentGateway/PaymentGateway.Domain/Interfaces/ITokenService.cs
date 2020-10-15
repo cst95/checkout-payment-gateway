@@ -7,7 +7,7 @@ namespace PaymentGateway.Domain.Interfaces
     public interface ITokenService
     {
         /// <summary>
-        /// Create a Json Web Token for the given user.
+        /// Create a JSON Web Token for the given user.
         /// </summary>
         /// <param name="user">The user to create the token for.</param>
         /// <param name="currentUtcTime">The current UTC time.</param>

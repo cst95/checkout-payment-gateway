@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
+using PaymentGateway.Data.Interfaces;
+using PaymentGateway.Data.Models.Entities;
 using PaymentGateway.Domain.Interfaces;
 using PaymentGateway.Domain.Models;
 
@@ -6,6 +9,13 @@ namespace PaymentGateway.Domain.Services
 {
     public class PaymentsService : IPaymentsService
     {
+        private readonly IPaymentsRepository _paymentsRepository;
+
+        public PaymentsService(IPaymentsRepository paymentsRepository)
+        {
+            _paymentsRepository = paymentsRepository;
+        }
+        
         public IUnprocessedPayment CreateUnprocessedPayment(IPaymentRequest paymentRequest)
         {
             if (paymentRequest == null) throw new ArgumentNullException(nameof(paymentRequest));
@@ -26,7 +36,6 @@ namespace PaymentGateway.Domain.Services
                 DateTime = DateTime.UtcNow
             };
         }
-            
 
         public IProcessedPayment CreateProcessedPayment(IUnprocessedPayment unprocessedPayment, IAcquiringBankResponse acquiringBankResponse)
         {
@@ -52,6 +61,27 @@ namespace PaymentGateway.Domain.Services
             processedPayment.AcquiringBankPaymentId = acquiringBankResponse.PaymentId;
             
             return processedPayment;
+        }
+
+        public async Task<PaymentDetails> GetPaymentByIdAsync(string paymentId)
+        {
+            var result = await _paymentsRepository.GetPaymentByIdAsync(paymentId);
+
+            if (result == null) return null;
+
+            return new PaymentDetails
+            {
+                Amount = result.Amount,
+                CardCvv = result.CardCvv,
+                CardExpiryMonth = result.CardExpiryMonth,
+                CardExpiryYear = result.CardExpiryYear,
+                CardNumber = result.CardNumber,
+                Currency = result.Currency,
+                DateTime = result.DateTime,
+                Id = result.Id,
+                Success = result.Success,
+                UserId = result.UserId
+            };
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PaymentGateway.Data.Interfaces;
@@ -20,7 +21,6 @@ namespace PaymentGateway.Data.Repositories
 
         public async Task<SavePaymentResult> SavePaymentAsync(Payment payment)
         {
-            
             await _dbContext.Payments.AddAsync(payment);
 
             try
@@ -47,5 +47,10 @@ namespace PaymentGateway.Data.Repositories
                 Payment = payment
             };
         }
+
+        public Task<Payment> GetPaymentByIdAsync(string paymentId) =>
+            string.IsNullOrEmpty(paymentId)
+                ? null
+                : _dbContext.Payments.Where(p => p.Id == paymentId).SingleOrDefaultAsync();
     }
 }

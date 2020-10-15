@@ -31,29 +31,36 @@ namespace PaymentGateway.Extensions
         /// <param name="app"></param>
         /// <param name="userManager"></param>
         /// <returns></returns>
-        public static void CreateTestUser(this IApplicationBuilder app, UserManager<User> userManager)
+        public static void CreateTestUsers(this IApplicationBuilder app, UserManager<User> userManager)
         {
             const string testUserName = "test";
+            const string testUserName2 = "test2";
             const string testPassword = "Password123!";
 
-            if (userManager.FindByNameAsync(testUserName).Result != null)
+            CreateTestUser(userManager, testUserName, testPassword);
+            CreateTestUser(userManager, testUserName2, testPassword);
+        }
+
+        private static void CreateTestUser(UserManager<User> userManager, string username, string password)
+        {
+            if (userManager.FindByNameAsync(username).Result != null)
             {
-                Log.Information("Test user already exists.");
+                Log.Information("Test user with username {Username} already exists.", username);
                 return;
             }
             
             var identityResult = userManager.CreateAsync(new User
             {
-                UserName = testUserName
-            }, testPassword).Result;
+                UserName = username
+            }, password).Result;
 
             if (identityResult.Succeeded)
             {
-                Log.Information("Test user successfully created.");
+                Log.Information("Test user with username {Username} successfully created.", username);
             }
             else
             {
-                Log.Warning("Test user creation failed.");
+                Log.Warning("Test user with username {Username} creation failed.", username);
             }
         }
     }

@@ -1,8 +1,9 @@
 ﻿using System;
+using PaymentGateway.Data.Models.Entities;
 
-namespace PaymentGateway.Data.Models.Entities
+namespace PaymentGateway.Domain.Models
 {
-    public class Payment
+    public class PaymentDetails
     {
         /// <summary>
         /// The unique payment identifier.
@@ -29,10 +30,6 @@ namespace PaymentGateway.Data.Models.Entities
         /// </summary>
         public string UserId { get; set; }
         /// <summary>
-        /// The user that made the payment.
-        /// </summary>
-        public User User { get; set; }
-        /// <summary>
         /// The value of the payment.
         /// </summary>
         public decimal Amount { get; set; }
@@ -40,10 +37,6 @@ namespace PaymentGateway.Data.Models.Entities
         /// The currency of the payment.
         /// </summary>
         public Currency Currency { get; set; }
-        /// <summary>
-        /// The unique identifier assigned by the acquiring bank.
-        /// </summary>
-        public string AcquiringBankPaymentId { get; set; }
         /// <summary>
         /// Indicates whether the payment was successful or not.
         /// </summary>

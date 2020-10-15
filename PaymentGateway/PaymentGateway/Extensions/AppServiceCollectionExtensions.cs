@@ -8,6 +8,8 @@ using PaymentGateway.Data.Interfaces;
 using PaymentGateway.Data.Repositories;
 using PaymentGateway.Domain.Interfaces;
 using PaymentGateway.Domain.Services;
+using PaymentGateway.Helpers;
+using PaymentGateway.Interfaces;
 
 namespace PaymentGateway.Extensions
 {
@@ -38,6 +40,7 @@ namespace PaymentGateway.Extensions
             services.AddTransient<IPaymentsRepository, PaymentsRepository>();
             services.AddTransient<IPaymentsService, PaymentsService>();
             services.AddTransient<IPaymentProcessor, PaymentProcessor>();
+            services.AddTransient<IPaymentDetailsDtoFactory, PaymentDetailsDtoFactory>();
 
             if (environment.IsDevelopment())
             {
