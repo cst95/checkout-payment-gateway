@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Moq;
 using PaymentGateway.Data.Models.Entities;
 using PaymentGateway.Domain.Interfaces;
 using PaymentGateway.Domain.Models;
@@ -15,7 +17,8 @@ namespace PaymentGateway.Tests.Domain.Services
 
         public FakeAcquiringBankTests()
         {
-            _fakeAcquiringBank = new FakeAcquiringBank();
+            var loggerMock = new Mock<ILogger<FakeAcquiringBank>>();
+            _fakeAcquiringBank = new FakeAcquiringBank(loggerMock.Object);
         }
 
         [Fact]

@@ -30,10 +30,14 @@ namespace PaymentGateway.Domain.Services
             if (user == null) return new LoginResponse();
 
             var loginSuccess = await _userManager.CheckPasswordAsync(user, password);
-            
-            if (!loginSuccess) return new LoginResponse();
 
-            _logger.LogInformation("User with username: {UserName} has successfully logged in.", user.UserName);
+            if (!loginSuccess)
+            {
+                _logger.LogWarning("{UserName} has attempted to login with an incorrect password.", user.UserName);
+                return new LoginResponse();
+            }
+
+            _logger.LogInformation("{UserName} has successfully logged in.", user.UserName);
             
             var tokenResponse = _tokenService.CreateJsonWebToken(user, DateTime.UtcNow);
 

@@ -27,7 +27,7 @@ namespace PaymentGateway.Middleware
             }
             catch (Exception exception)
             {
-                _logger.LogError("Unhandled exception occured. Message {Message}. Exception {Exception}", exception.Message, exception);
+                _logger.LogError("Unhandled exception {Message} occured. Exception: {Exception}", exception.Message, exception);
 
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;

@@ -42,8 +42,6 @@ namespace PaymentGateway
 
             app.UseSerilogRequestLogging();
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthentication();

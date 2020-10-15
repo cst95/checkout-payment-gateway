@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.Logging;
 using Moq;
 using PaymentGateway.Data.Interfaces;
 using PaymentGateway.Data.Models.Entities;
@@ -17,8 +18,9 @@ namespace PaymentGateway.Tests.Domain.Services
         
         public PaymentsServiceTests()
         {
+            var loggerMock = new Mock<ILogger<PaymentsService>>();
             _paymentsRepositoryMock = new Mock<IPaymentsRepository>();
-            _paymentsService = new PaymentsService(_paymentsRepositoryMock.Object);
+            _paymentsService = new PaymentsService(_paymentsRepositoryMock.Object, loggerMock.Object);
         }
         
         [Fact]

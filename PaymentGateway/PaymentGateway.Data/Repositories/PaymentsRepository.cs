@@ -29,7 +29,7 @@ namespace PaymentGateway.Data.Repositories
             }
             catch (DbUpdateException exception)
             {
-                _logger.LogError("Failed to save payment to the database: {PaymentId}. {Exception}", payment.Id,
+                _logger.LogError("Failed to save payment {PaymentId} to the database. {Exception}", payment.Id,
                     exception);
 
                 return new SavePaymentResult
@@ -39,7 +39,7 @@ namespace PaymentGateway.Data.Repositories
                 };
             }
 
-            _logger.LogInformation("Payment successfully saved to the database: {PaymentId}", payment.Id);
+            _logger.LogInformation("Payment {PaymentId} successfully saved to the database.", payment.Id);
 
             return new SavePaymentResult
             {

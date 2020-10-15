@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using PaymentGateway.Data.Interfaces;
-using PaymentGateway.Data.Models.Entities;
 using PaymentGateway.Domain.Interfaces;
 using PaymentGateway.Domain.Models;
 
@@ -10,10 +10,12 @@ namespace PaymentGateway.Domain.Services
     public class PaymentsService : IPaymentsService
     {
         private readonly IPaymentsRepository _paymentsRepository;
+        private readonly ILogger<PaymentsService> _logger;
 
-        public PaymentsService(IPaymentsRepository paymentsRepository)
+        public PaymentsService(IPaymentsRepository paymentsRepository, ILogger<PaymentsService> logger)
         {
             _paymentsRepository = paymentsRepository;
+            _logger = logger;
         }
         
         public IUnprocessedPayment CreateUnprocessedPayment(IPaymentRequest paymentRequest)
@@ -67,8 +69,14 @@ namespace PaymentGateway.Domain.Services
         {
             var result = await _paymentsRepository.GetPaymentByIdAsync(paymentId);
 
-            if (result == null) return null;
+            if (result == null)
+            {
+                _logger.LogWarning("Payment {PaymentId} could not be found.", paymentId);
+                return null;
+            }
 
+            _logger.LogInformation("Payment {PaymentId} has successfully been retrieved from the store.", paymentId);
+            
             return new PaymentDetails
             {
                 Amount = result.Amount,
