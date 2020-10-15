@@ -34,7 +34,7 @@ namespace PaymentGateway
             if (env.IsDevelopment())
             {
                 app.CreateDevelopmentDatabase();
-                app.CreateTestUser(userManager);
+                app.CreateTestUsers(userManager);
             }
 
             app.UseSerilogRequestLogging();
