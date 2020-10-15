@@ -13,7 +13,7 @@ namespace PaymentGateway.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/payments")]
     public class PaymentsController : ControllerBase
     {
         private readonly UserManager<User> _userManager;

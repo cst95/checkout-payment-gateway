@@ -6,7 +6,7 @@ using PaymentGateway.Models.DTOs;
 namespace PaymentGateway.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/account")]
     public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
