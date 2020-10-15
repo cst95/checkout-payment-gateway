@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using PaymentGateway.Data;
 using PaymentGateway.Data.Models.Entities;
+using PaymentGateway.Domain.Interfaces;
 
 namespace PaymentGateway.Extensions
 {
@@ -32,18 +33,20 @@ namespace PaymentGateway.Extensions
         /// <param name="configuration"></param>
         public static void AddAuthenticationSetup(this IServiceCollection services, IConfiguration configuration)
         {
-            // TODO: Resolve ISigningKeyService here to get the issuer signing key.
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
+            services.AddOptions<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme)
+                .Configure<ISigningKeyService>((options, signingKeyService) =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateAudience = false,
                         ValidateIssuer = false,
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration[TokenKey]))
+                        IssuerSigningKey = signingKeyService.GetSigningKey()
                     };
                 });
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer();
 
             services.AddAuthorization();
         }
