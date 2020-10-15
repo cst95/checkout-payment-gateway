@@ -8,6 +8,7 @@ using PaymentGateway.Domain.Interfaces;
 using PaymentGateway.Interfaces;
 using PaymentGateway.Models;
 using PaymentGateway.Models.DTOs;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace PaymentGateway.Controllers
 {
@@ -31,6 +32,11 @@ namespace PaymentGateway.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(Summary = "Process a payment")]
+        [Produces("application/json"), Consumes("application/json")]
+        [SwaggerResponse(200, "The payment has been processed", typeof(ProcessPaymentResponseDto))]
+        [SwaggerResponse(400, "The payment request supplied is invalid")]
+        [SwaggerResponse(401, "You are not authenticated")]
         public async Task<ActionResult<ProcessPaymentResponseDto>> ProcessPayment(
             [FromBody] ProcessPaymentRequestDto paymentRequestDto)
         {
@@ -55,6 +61,12 @@ namespace PaymentGateway.Controllers
         }
 
         [HttpGet("{paymentId}")]
+        [SwaggerOperation(Summary = "Retrieve a payment's details")]
+        [Produces("application/json"), Consumes("application/json")]
+        [SwaggerResponse(200, "The payment has been processed", typeof(PaymentDetailsDto))]
+        [SwaggerResponse(401, "You are not authenticated")]
+        [SwaggerResponse(403, "You are not authorized to view that payment")]
+        [SwaggerResponse(404, "A payment with that paymentId does not exist")]
         public async Task<ActionResult<PaymentDetailsDto>> GetPaymentById([FromRoute, Required] string paymentId)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
