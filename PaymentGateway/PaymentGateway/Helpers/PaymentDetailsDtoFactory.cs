@@ -7,6 +7,8 @@ namespace PaymentGateway.Helpers
     {
         private const int DigitsAllowedAtStartOfCardNumber = 6;
         private const int DigitsAllowedAtEndOfCardNumber = 4;
+        private const int LowerLimitBeforeOnlyUnMaskingLast4Digits = 13;
+        
         private const char MaskChar = 'X';
         
         public PaymentDetailsDto CreatePaymentDetailsDto(PaymentDetails payment)
@@ -17,21 +19,28 @@ namespace PaymentGateway.Helpers
                 Currency = payment.Currency,
                 Success = payment.Success,
                 PaymentCreatedAt = payment.DateTime,
-                CardDetails = new CardDetailsDto
-                {
-                    MaskedCardNumber = MaskCardNumber(payment.CardNumber),
-                    Cvv = payment.CardCvv,
-                    ExpiryMonth = payment.CardExpiryMonth,
-                    ExpiryYear = payment.CardExpiryYear
-                }
+                CardDetails = GetCardDetailsDto(payment)
             };
 
-        private string MaskCardNumber(string cardNumber)
+        private CardDetailsDto GetCardDetailsDto(PaymentDetails payment) => new CardDetailsDto
         {
-            var maskLength = cardNumber.Length - DigitsAllowedAtEndOfCardNumber - DigitsAllowedAtStartOfCardNumber;
+            MaskedCardNumber = GetMaskedCardNumber(payment.CardNumber),
+            Cvv = payment.CardCvv,
+            ExpiryMonth = payment.CardExpiryMonth,
+            ExpiryYear = payment.CardExpiryYear
+        };
+
+        private string GetMaskedCardNumber(string cardNumber) =>
+            cardNumber.Length < LowerLimitBeforeOnlyUnMaskingLast4Digits
+                ? MaskCardNumber(cardNumber, 0, DigitsAllowedAtEndOfCardNumber)
+                : MaskCardNumber(cardNumber, DigitsAllowedAtStartOfCardNumber, DigitsAllowedAtEndOfCardNumber);
+        
+        private string MaskCardNumber(string cardNumber, int digitsAllowedAtStart, int digitsAllowedAtEnd)
+        {
+            var maskLength = cardNumber.Length - digitsAllowedAtStart - digitsAllowedAtEnd;
             var mask = new string(MaskChar, maskLength);
-            var start = cardNumber.Substring(0, DigitsAllowedAtStartOfCardNumber);
-            var end = cardNumber.Substring(cardNumber.Length - DigitsAllowedAtEndOfCardNumber, DigitsAllowedAtEndOfCardNumber);
+            var start = cardNumber.Substring(0, digitsAllowedAtStart);
+            var end = cardNumber.Substring(cardNumber.Length - digitsAllowedAtEnd, digitsAllowedAtEnd);
 
             return start + mask + end;
         }

@@ -153,5 +153,53 @@ namespace PaymentGateway.Tests.Domain.Services
 
             Assert.Throws<ArgumentNullException>(act);
         }
+
+        [Fact]
+        public async void GetPaymentByIdAsync_WhenRepositoryReturnsNull_ReturnsNull()
+        {
+            _paymentsRepositoryMock.Setup(x => x.GetPaymentByIdAsync(It.IsAny<string>())).ReturnsAsync((Payment) null);
+
+            var result = await _paymentsService.GetPaymentByIdAsync(It.IsAny<string>());
+            
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async void GetPaymentByIdAsync_WhenRepositoryReturnsPayment_ReturnsCorrectPaymentDetails()
+        {
+            const string userId = "1234";
+            
+            var payment = new Payment
+            {
+                Id = Guid.NewGuid().ToString(),
+                Amount = 12,
+                AcquiringBankPaymentId = Guid.NewGuid().ToString(),
+                Currency = Currency.EUR,
+                CardCvv = 123,
+                CardExpiryMonth = 12,
+                CardExpiryYear = 2020,
+                CardNumber = "1234",
+                DateTime = DateTime.Now,
+                Success = true,
+                User = new User {Id = userId},
+                UserId = userId
+            };
+                
+            _paymentsRepositoryMock.Setup(x => x.GetPaymentByIdAsync(payment.Id)).ReturnsAsync(payment);
+
+            var result = await _paymentsService.GetPaymentByIdAsync(payment.Id);
+            
+            Assert.Equal(payment.Amount, result.Amount);
+            Assert.Equal(payment.Currency, result.Currency);
+            Assert.Equal(payment.Id, result.Id);
+            Assert.Equal(payment.Success, result.Success);
+            Assert.Equal(payment.User.Id, result.UserId);
+            Assert.Equal(payment.UserId, result.UserId);
+            Assert.Equal(payment.CardCvv, result.CardCvv);
+            Assert.Equal(payment.CardNumber, result.CardNumber);
+            Assert.Equal(payment.DateTime, result.DateTime);
+            Assert.Equal(payment.CardExpiryMonth, result.CardExpiryMonth);
+            Assert.Equal(payment.CardExpiryYear, result.CardExpiryYear);
+        }
     }
 }
