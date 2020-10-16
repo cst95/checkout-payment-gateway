@@ -145,3 +145,4 @@ If you request details for a payment that was not created by the user you are au
 - Improve unit test coverage for the PaymentGateway project to cover Startup.cs, Program.cs and the Extensions directory.
 - Add unit tests for PaymentGateway.Data project (Need to learn how to unit test when using EF Core).
 - Add an integration test project.
+- Use a library like Polly to improve the resilience of the application and add fault handling for sensitive operations like interacting with the acquiring bank or saving the payment to the database.
