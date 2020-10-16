@@ -40,14 +40,14 @@ The following assumptions have been made whilst developing the Payment Gateway a
 
 - I have assumed it is sufficient to mock the acquiring bank from within the PaymentGateway.Domain project and not as a separate API. I have created a `FakeAcquiringBank` class for this purpose.
 - The `FakeAcquiringBank` implementation will fail a payment if the amount is greater than 500 in any currency (for testing). 
-- The Acquiring Bank is responsible for forming its own `IAcquiringBankRequest`.
+- The acquiring bank is responsible for forming its own `IAcquiringBankRequest`.
 - The `ProcessPaymentAsync` method on `IAcquiringBank` can throw any exception and all of them will be handled in the same way. 
 
 ## Running the application
 
 The application has three core pieces of functionality:
 
-1. Requesting a JSON web token from the API
+1. Requesting a JSON web token from the API.
 2. Processing a payment using the API.
 3. Retrieving a payment's details using the API.
 
