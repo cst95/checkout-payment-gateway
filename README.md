@@ -39,7 +39,7 @@ The following assumptions have been made whilst developing the Payment Gateway a
 #### Mocking the acquiring bank
 
 - I have assumed it is sufficient to mock the acquiring bank from within the PaymentGateway.Domain project and not as a separate API. I have created a `FakeAcquiringBank` class for this purpose.
-- The `FakeAcquiringBank` implementation will fail a payment if the amount is greater than 500 in any currency (for testing). 
+- The `FakeAcquiringBank` implementation will fail a payment if the `Amount` is greater than 500 in any currency (for testing). 
 - The acquiring bank is responsible for forming its own `IAcquiringBankRequest`.
 - The `ProcessPaymentAsync` method on `IAcquiringBank` can throw any exception and all of them will be handled in the same way. 
 
@@ -110,7 +110,7 @@ If successful, you should receive the following response with a different `payme
 }
 ```
 
-The `success` property indicates whether the payment was successful and the `paymentId` can be used with the `GET /api/payments/{paymentId}` endpoint to retrieve the details of the payment. Note that if you use an amount greater than 500, the acquiring bank will fail the payment and `success` will be `false`.
+The `success` property indicates whether the payment was successful and the `paymentId` can be used with the `GET /api/payments/{paymentId}` endpoint to retrieve the details of the payment. Note that if you use an `Amount` greater than 500, the acquiring bank will fail the payment and `success` will be `false`.
 
 #### Retrieving a payment's details
 
