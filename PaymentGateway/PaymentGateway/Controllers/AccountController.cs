@@ -21,6 +21,7 @@ namespace PaymentGateway.Controllers
         [SwaggerOperation(Summary = "Login and obtain your Bearer token")]
         [Produces("application/json"), Consumes("application/json")]
         [SwaggerResponse(200, "Login successful", typeof(LoginResponseDto))]
+        [SwaggerResponse(400, "The login request supplied is invalid")]
         [SwaggerResponse(401, "Login unsuccessful")]
         public async Task<ActionResult<LoginResponseDto>> Login([FromBody] LoginRequestDto loginRequest)
         {
