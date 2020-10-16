@@ -81,7 +81,7 @@ If successful, you should receive the following response with a different `token
     }
 ```
 
-The `token` property can be used to authenticate requests to other endpoints, and the `expires` property indicates when this token will no longer be valid.
+The `token` property can be used to authenticate requests to other endpoints, and the `expires` property indicates when this token will no longer be valid. By default the token is set to expire 12 hours after it is created.
 
 **Note that the following two requests will require the following HTTP Header** 
 `Authorization: Bearer {YOUR TOKEN}`.
